@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuneke.mapper.order.MeituanOrderMapper">
+    <resultMap id="BaseResultMap" type="com.yuneke.model.order.MeituanOrder">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="orderId" jdbcType="BIGINT" property="orderid"/>
+        <result column="orderNo" jdbcType="VARCHAR" property="orderno"/>
+        <result column="caution" jdbcType="VARCHAR" property="caution"/>
+        <result column="cityId" jdbcType="BIGINT" property="cityid"/>
+        <result column="createDt" jdbcType="TIMESTAMP" property="createdt"/>
+        <result column="updateDt" jdbcType="TIMESTAMP" property="updatedt"/>
+        <result column="daySeq" jdbcType="VARCHAR" property="dayseq"/>
+        <!--
+        <result column="deliveryTime" jdbcType="TIMESTAMP" property="deliverytime"/>
+        -->
+        <result column="detail" jdbcType="VARCHAR" property="detail"/>
+        <result column="ePoiId" jdbcType="BIGINT" property="epoiid"/>
+        <result column="extras" jdbcType="VARCHAR" property="extras"/>
+        <result column="hasInvoiced" jdbcType="TINYINT" property="hasinvoiced"/>
+        <result column="invoiceTitle" jdbcType="VARCHAR" property="invoicetitle"/>
+        <result column="isFavorites" jdbcType="TINYINT" property="isfavorites"/>
+        <result column="isPoiFirstOrder" jdbcType="TINYINT" property="ispoifirstorder"/>
+        <result column="isThirdShipping" jdbcType="TINYINT" property="isthirdshipping"/>
+        <result column="latitude" jdbcType="VARCHAR" property="latitude"/>
+        <result column="longitude" jdbcType="VARCHAR" property="longitude"/>
+        <result column="originalPrice" jdbcType="DOUBLE" property="originalprice"/>
+        <result column="payType" jdbcType="TINYINT" property="paytype"/>
+        <result column="poiAddress" jdbcType="VARCHAR" property="poiaddress"/>
+        <result column="poiName" jdbcType="VARCHAR" property="poiname"/>
+        <result column="poiPhone" jdbcType="VARCHAR" property="poiphone"/>
+        <result column="poiReceiveDetail" jdbcType="VARCHAR" property="poireceivedetail"/>
+        <result column="recipientAddress" jdbcType="VARCHAR" property="recipientaddress"/>
+        <result column="recipientName" jdbcType="VARCHAR" property="recipientname"/>
+        <result column="recipientPhone" jdbcType="VARCHAR" property="recipientphone"/>
+        <result column="shipperName" jdbcType="VARCHAR" property="shippername"/>
+        <result column="shipperPhone" jdbcType="VARCHAR" property="shipperphone"/>
+        <result column="shippingFee" jdbcType="DOUBLE" property="shippingfee"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="total" jdbcType="DOUBLE" property="total"/>
+        <result column="isShippingSelf" jdbcType="TINYINT" property="isshippingself"/>
+        <result column="shippingStatus" jdbcType="VARCHAR" property="shippingstatus"/>
+        <result column="refundStatus" jdbcType="VARCHAR" property="refundstatus"/>
+        <result column="refundReason" jdbcType="VARCHAR" property="refundreason"/>
+        <result column="cancelReason" jdbcType="VARCHAR" property="cancelreason"/>
+        <result column="isMerchantCacel" jdbcType="TINYINT" property="ismerchantcacel"/>
+        <result column="time_millis" jdbcType="VARCHAR" property="timeMillis"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="isPre" jdbcType="INTEGER" property="ispre"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, orderId, orderNo, caution, cityId, createDt, updateDt, daySeq, deliveryTime,
+        detail, ePoiId, extras, hasInvoiced, invoiceTitle, isFavorites, isPoiFirstOrder,
+        isThirdShipping, latitude, longitude, originalPrice, payType, poiAddress, poiName,
+        poiPhone, poiReceiveDetail, recipientAddress, recipientName, recipientPhone, shipperName,
+        shipperPhone, shippingFee, status, total, isShippingSelf, shippingStatus, refundStatus,
+        refundReason, cancelReason, isMerchantCacel, time_millis, is_delete, isPre
+    </sql>
+
+    <select id="selectDetailByNotRecieved" resultType="com.yuneke.vo.order.MeituanOrderVo">
+        select
+        m.id, m.orderId, m.orderNo, m.caution, m.cityId, m.createDt, m.updateDt, m.daySeq, m.deliveryTime,
+        m.detail, m.ePoiId, m.extras, m.hasInvoiced, m.invoiceTitle, m.isFavorites, m.isPoiFirstOrder,
+        m.isThirdShipping, m.latitude, m.longitude, m.originalPrice, m.payType, m.poiAddress, m.poiName,
+        m.poiPhone, m.poiReceiveDetail, m.recipientAddress, m.recipientName, m.recipientPhone, m.shipperName,
+        m.shipperPhone, m.shippingFee, m.status, m.total, m.isShippingSelf, m.shippingStatus, m.refundStatus,
+        m.refundReason, m.cancelReason, m.isMerchantCacel, m.time_millis, m.is_delete, m.isPre,
+        p.id pushId,p.type pushStatus
+        from t_meituan_order m
+        left join t_waimai_push p
+        on m.orderId = p.orderId
+        where
+        m.ePoiId=#{merchantId} and p.status=0
+        group by m.orderId
+        order by createDt desc
+        limit 10;
+    </select>
+</mapper>

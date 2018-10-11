@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuneke.mapper.order.ElemeOrderMapper">
+
+    <resultMap id="BaseResultMap" type="com.yuneke.model.order.ElemeOrder">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="orderId" jdbcType="VARCHAR" property="orderid"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="createdAt" jdbcType="TIMESTAMP" property="createdat"/>
+        <result column="activeAt" jdbcType="TIMESTAMP" property="activeat"/>
+        <result column="deliverFee" jdbcType="DOUBLE" property="deliverfee"/>
+        <result column="deliverTime" jdbcType="TIMESTAMP" property="delivertime"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <result column="groups" jdbcType="VARCHAR" property="groups"/>
+        <result column="invoice" jdbcType="VARCHAR" property="invoice"/>
+        <result column="book" jdbcType="TINYINT" property="book"/>
+        <result column="onlinePaid" jdbcType="TINYINT" property="onlinepaid"/>
+        <result column="phoneList" jdbcType="VARCHAR" property="phonelist"/>
+        <result column="shopId" jdbcType="VARCHAR" property="shopid"/>
+        <result column="shopName" jdbcType="VARCHAR" property="shopname"/>
+        <result column="daySn" jdbcType="INTEGER" property="daysn"/>
+        <result column="status" jdbcType="VARCHAR" property="status"/>
+        <result column="refundStatus" jdbcType="VARCHAR" property="refundstatus"/>
+        <result column="reason" jdbcType="VARCHAR" property="reason"/>
+        <result column="userId" jdbcType="VARCHAR" property="userid"/>
+        <result column="totalPrice" jdbcType="DOUBLE" property="totalprice"/>
+        <result column="originalPrice" jdbcType="DOUBLE" property="originalprice"/>
+        <result column="consignee" jdbcType="VARCHAR" property="consignee"/>
+        <result column="deliveryGeo" jdbcType="VARCHAR" property="deliverygeo"/>
+        <result column="deliveryPoiAddress" jdbcType="VARCHAR" property="deliverypoiaddress"/>
+        <result column="invoiced" jdbcType="TINYINT" property="invoiced"/>
+        <result column="income" jdbcType="DOUBLE" property="income"/>
+        <result column="serviceRate" jdbcType="DOUBLE" property="servicerate"/>
+        <result column="serviceFee" jdbcType="DOUBLE" property="servicefee"/>
+        <result column="hongbao" jdbcType="DOUBLE" property="hongbao"/>
+        <result column="packageFee" jdbcType="DOUBLE" property="packagefee"/>
+        <result column="activityTotal" jdbcType="DOUBLE" property="activitytotal"/>
+        <result column="shopPart" jdbcType="DOUBLE" property="shoppart"/>
+        <result column="elemePart" jdbcType="DOUBLE" property="elemepart"/>
+        <result column="downgraded" jdbcType="TINYINT" property="downgraded"/>
+        <result column="railwayAddress" jdbcType="VARCHAR" property="railwayaddress"/>
+        <result column="vipDeliveryFeeDiscount" jdbcType="VARCHAR" property="vipdeliveryfeediscount"/>
+        <result column="time_millis" jdbcType="VARCHAR" property="timeMillis"/>
+        <result column="order_activities" jdbcType="VARCHAR" property="orderActivities"/>
+        <result column="secret_phone_expire_time" jdbcType="TIMESTAMP" property="secretPhoneExpireTime"/>
+        <result column="is_delete" jdbcType="INTEGER" property="isDelete"/>
+        <result column="merchantId" jdbcType="BIGINT" property="merchantid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, orderId, address, createdAt, activeAt, deliverFee, deliverTime, description,
+        groups, invoice, book, onlinePaid, phoneList, shopId, shopName, daySn, status, refundStatus,
+        reason, userId, totalPrice, originalPrice, consignee, deliveryGeo, deliveryPoiAddress,
+        invoiced, income, serviceRate, serviceFee, hongbao, packageFee, activityTotal, shopPart,
+        elemePart, downgraded, railwayAddress, vipDeliveryFeeDiscount, time_millis, order_activities,
+        secret_phone_expire_time, is_delete, merchantId
+    </sql>
+
+
+    <select id="selectDetailByNotRecieved" resultType="com.yuneke.vo.order.ElemeOrderVo">
+        select
+            e.id, e.orderId, e.address, e.createdAt, e.activeAt, e.deliverFee, e.deliverTime, e.description,
+            e.groups, e.invoice, e.book, e.onlinePaid, e.phoneList, e.shopId, e.shopName, e.daySn, e.status, e.refundStatus,
+            e.reason, e.userId, e.totalPrice, e.originalPrice, e.consignee, e.deliveryGeo, e.deliveryPoiAddress,
+            e.invoiced, e.income, e.serviceRate, e.serviceFee, e.hongbao, e.packageFee, e.activityTotal, e.shopPart,
+            e.elemePart, e.downgraded, e.railwayAddress, e.vipDeliveryFeeDiscount, e.time_millis, e.order_activities,
+            e.secret_phone_expire_time, e.is_delete, e.merchantId,
+            p.id pushId,p.status pushStatus
+        from t_eleme_order e
+        left join t_push p
+        on e.orderId = p.orderId
+        where
+        e.merchantId=#{merchantId} and p.isReceiver=0
+        group by e.orderId
+        order by e.createdAt desc
+        limit 10;
+    </select>
+
+</mapper>

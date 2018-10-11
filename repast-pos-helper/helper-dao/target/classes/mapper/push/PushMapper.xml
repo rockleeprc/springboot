@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yuneke.mapper.push.PushMapper">
+    <resultMap id="BaseResultMap" type="com.yuneke.model.push.Push">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="merchant_id" jdbcType="VARCHAR" property="merchantId"/>
+        <result column="orderId" jdbcType="VARCHAR" property="orderid"/>
+        <result column="create_date" jdbcType="TIMESTAMP" property="createDate"/>
+        <result column="type" jdbcType="TINYINT" property="type"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="data" jdbcType="VARCHAR" property="data"/>
+        <result column="count" jdbcType="TINYINT" property="count"/>
+        <result column="isReceiver" jdbcType="TINYINT" property="isreceiver"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, merchant_id, orderId, create_date, type, status, data, count, isReceiver
+    </sql>
+
+    <update id="updateIsReceiver">
+        update t_push set isReceiver=1 where id&lt;=#{pushId} and orderId=#{orderId} and merchant_id=#{merchantId}
+    </update>
+
+</mapper>
