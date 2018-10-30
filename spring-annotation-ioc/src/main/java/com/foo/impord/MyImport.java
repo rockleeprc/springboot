@@ -1,4 +1,4 @@
-package com.foo.config;
+package com.foo.impord;
 
 import org.springframework.context.annotation.ImportSelector;
 import org.springframework.core.type.AnnotationMetadata;

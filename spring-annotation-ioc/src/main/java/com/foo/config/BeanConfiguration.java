@@ -2,14 +2,14 @@ package com.foo.config;
 
 
 import com.foo.bean.Green;
+import com.foo.bean.GreenFactoryBean;
 import com.foo.bean.Person;
 import com.foo.bean.Red;
 import com.foo.condition.LinuxCondition;
 import com.foo.condition.WindowsCondition;
+import com.foo.impord.MyImport;
+import com.foo.impord.MyImportRegister;
 import org.springframework.context.annotation.*;
-import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 @Configuration
 /*
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @ComponentScan(basePackages = "com.foo",includeFilters = {@ComponentScan.Filter(type=FilterType.ANNOTATION,classes={Repository.class})},useDefaultFilters=false)
  */
 @ComponentScan(basePackages = "com.foo")
-@Import({Red.class, Green.class, MyImport.class,MyImportRegister.class})
+@Import({Red.class, MyImport.class, MyImportRegister.class})
 public class BeanConfiguration {
 
     @Lazy
@@ -41,5 +41,10 @@ public class BeanConfiguration {
     @Bean
     public Person linus() {
         return new Person("linus", 50);
+    }
+
+    @Bean
+    public GreenFactoryBean green() {
+        return new GreenFactoryBean();
     }
 }

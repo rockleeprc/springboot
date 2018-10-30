@@ -1,4 +1,4 @@
-package com.foo.config;
+package com.foo.impord;
 
 import com.foo.bean.Black;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
