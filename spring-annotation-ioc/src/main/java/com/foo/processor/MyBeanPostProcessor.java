@@ -1,5 +1,6 @@
-package com.foo.bean;
+package com.foo.processor;
 
+import com.foo.bean.Yellow;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 

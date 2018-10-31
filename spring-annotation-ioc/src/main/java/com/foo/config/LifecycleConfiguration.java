@@ -1,13 +1,10 @@
 package com.foo.config;
 
-import com.foo.bean.Blue;
-import com.foo.bean.MyBeanPostProcessor;
-import com.foo.bean.Red;
-import com.foo.bean.Yellow;
+import com.foo.bean.*;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
 
 @Configuration
 public class LifecycleConfiguration {
@@ -27,12 +24,6 @@ public class LifecycleConfiguration {
     @Bean
     public Yellow yellow() {
         return new Yellow();
-    }
-
-    @Bean
-    public BeanPostProcessor beanPostProcessor() {
-        return new MyBeanPostProcessor();
-
     }
 
 }

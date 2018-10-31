@@ -29,7 +29,7 @@ public class LogAspect {
         System.out.println("LogAspect.after..." + methodName);
     }
 
-    @Around("pointCut()")
+    //@Around("pointCut()")
     public void around(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("before around ");
         System.out.println("around "+pjp.getTarget().getClass());
