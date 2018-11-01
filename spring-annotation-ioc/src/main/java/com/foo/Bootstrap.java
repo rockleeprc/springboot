@@ -13,8 +13,19 @@ import java.util.Map;
 
 public class Bootstrap {
     public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AutowiredConfiguration.class);
+        Man man = context.getBean(Man.class);
+        System.out.println(man);
+        context.close();
+    }
+
+    /**
+     * 事件
+     */
+    public static void m3() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProcessorConfiguration.class);
-        context.publishEvent(new ApplicationEvent(new String("自定义事件")){});
+        context.publishEvent(new ApplicationEvent(new String("自定义事件")) {
+        });
         context.close();
     }
 
@@ -29,17 +40,23 @@ public class Bootstrap {
         print(context);
     }
 
+    /**
+     * @Profile 加载profile
+     */
     public static void m1() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProfileConfiguration.class);
-
         Map<String, Cat> cats = context.getBeansOfType(Cat.class);
         for (Map.Entry<String, Cat> entry : cats.entrySet()) {
             System.out.println(entry.getKey() + "---" + entry.getKey());
         }
-
         context.close();
     }
 
+    /**
+     * 打印context
+     *
+     * @param context
+     */
     public static void print(ApplicationContext context) {
         Map<String, Cat> cats = context.getBeansOfType(Cat.class);
         for (Map.Entry<String, Cat> entry : cats.entrySet()) {

@@ -8,16 +8,14 @@ import org.springframework.core.env.Environment;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
+import java.util.Arrays;
+
 public class WindowsCondition implements Condition {
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-
         ClassLoader classLoader = context.getClassLoader();
-
         BeanDefinitionRegistry registry = context.getRegistry();
-
         ResourceLoader resourceLoader = context.getResourceLoader();
-
         Environment environment = context.getEnvironment();
 
         String os = environment.getProperty("os.name");
