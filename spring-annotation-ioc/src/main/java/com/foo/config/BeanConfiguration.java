@@ -11,7 +11,7 @@ import com.foo.impord.MyImport;
 import com.foo.impord.MyImportRegister;
 import org.springframework.context.annotation.*;
 
-@Configuration
+
 /*
 不包含
 @ComponentScan(basePackages="com.foo",excludeFilters = {@ComponentScan.Filter({Controller.class,Service.class})})
@@ -20,6 +20,7 @@ import org.springframework.context.annotation.*;
 完整写法
 @ComponentScan(basePackages = "com.foo",includeFilters = {@ComponentScan.Filter(type=FilterType.ANNOTATION,classes={Repository.class})},useDefaultFilters=false)
  */
+@Configuration
 @ComponentScan(basePackages = "com.foo")
 @Import({Red.class, MyImport.class, MyImportRegister.class})
 public class BeanConfiguration {
