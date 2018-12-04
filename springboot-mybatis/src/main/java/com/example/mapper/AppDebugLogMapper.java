@@ -2,8 +2,6 @@ package com.example.mapper;
 
 import com.example.domain.AppDebugLog;
 
-import java.util.List;
-
 public interface AppDebugLogMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -18,6 +16,4 @@ public interface AppDebugLogMapper {
     int updateByPrimaryKeyWithBLOBs(AppDebugLog record);
 
     int updateByPrimaryKey(AppDebugLog record);
-
-    List<AppDebugLog> selectAll();
 }
