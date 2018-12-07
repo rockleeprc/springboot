@@ -49,8 +49,8 @@ public class PhoneSortDriver {
         job.setOutputKeyClass(LongWritable.class);
         job.setOutputValueClass(PhoneFlowSort.class);
 
-        job.setPartitionerClass(ProvincePartiioner.class);
-        job.setNumReduceTasks(3);
+//        job.setPartitionerClass(ProvincePartiioner.class);
+//        job.setNumReduceTasks(3);
 
         FileInputFormat.setInputPaths(job, new Path(args[0]));
         FileOutputFormat.setOutputPath(job, new Path(args[1]));
