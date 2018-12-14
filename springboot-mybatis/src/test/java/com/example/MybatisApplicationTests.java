@@ -1,7 +1,7 @@
 package com.example;
 
-import com.example.domain.AppDebugLog;
-import com.example.mapper.AppDebugLogMapper;
+import com.example.domain.Classes;
+import com.example.mapper.ClassMapper;
 import com.github.pagehelper.PageHelper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.sql.DataSource;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -24,23 +23,28 @@ public class MybatisApplicationTests {
     private SqlSession sqlSession;
 
     @Autowired
-    private AppDebugLogMapper appDebugLogMapper;
+    private ClassMapper classMapper;
 
     @Test
-    public void pageHelper() {
-        PageHelper.startPage(2, 2);
-        List<AppDebugLog> list = appDebugLogMapper.selectAll();
-        for (AppDebugLog log : list) {
-            System.out.println(log.getDetail());
-        }
+    public void testOneToMany() {
+//        Classes c1 = classMapper.getClass3(1);
+//        System.out.println(c1);
+        Classes c2 = classMapper.getClass4(1);
+        System.out.println(c2.getName());
+//        System.out.println(c2.getStudents());
+//        c2.getStudents().forEach(s ->
+//                System.out.println("s_name" + s.getName())
+//        );
     }
 
     @Test
-    public void appDebugLogMapper() {
-        AppDebugLog appDebugLog = appDebugLogMapper.selectByPrimaryKey(16L);
-        System.out.println(appDebugLog.getDetail());
-        System.out.println(appDebugLog.getCreateTime());
+    public void testOneToOne() {
+        Classes c1 = classMapper.getClass(1);
+        System.out.println(c1);
+        Classes c2 = classMapper.getClass2(1);
+        System.out.println(c2);
     }
+
 
     @Test
     public void sqlSession() {

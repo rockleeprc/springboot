@@ -19,7 +19,7 @@ import java.io.IOException;
  * <p>
  * Map输出Key默认字典顺序
  * <p>
- * Partitioner Reduce输出个数     Partitioner Reduce输出个数
+ * Partitioner Reduce输出个数
  * Partitioner 数量从0开始 part-r-00000、part-r-00001、part-r-00002
  * <p>
  * Combiner 不适合求平均值，适合汇总
