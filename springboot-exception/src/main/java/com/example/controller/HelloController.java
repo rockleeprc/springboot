@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/hello")
 public class HelloController {
@@ -22,4 +26,13 @@ public class HelloController {
         fooService.exception();
         return Result.ok();
     }
+
+    @RequestMapping("/info")
+    public Result<Date> info(HttpServletRequest request){
+        Map<String, String[]> parameterMap = request.getParameterMap();
+        StringBuffer requestURL = request.getRequestURL();
+        return Result.ok(new Date());
+    }
+
+
 }
