@@ -10,6 +10,8 @@ import com.foo.condition.WindowsCondition;
 import com.foo.impord.MyImport;
 import com.foo.impord.MyImportRegister;
 import org.springframework.context.annotation.*;
+import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 
 
 /*
@@ -22,6 +24,7 @@ import org.springframework.context.annotation.*;
  */
 @Configuration
 @ComponentScan(basePackages = "com.foo")
+@ComponentScan(value={"",""},includeFilters = @ComponentScan.Filter(value={Controller.class, Service.class}),useDefaultFilters = false)
 @Import({Red.class, MyImport.class, MyImportRegister.class})
 public class BeanConfiguration {
 
@@ -49,3 +52,15 @@ public class BeanConfiguration {
         return new GreenFactoryBean();
     }
 }
+/*
+@Bean+@Condition+@Scope
+@ComponentScan
+    @Controller
+    @Service
+    @Repository
+    @Component
+@Import
+    xxx.class
+    ImportSelector
+    ImportBeanDefinitionRegistrar
+ */

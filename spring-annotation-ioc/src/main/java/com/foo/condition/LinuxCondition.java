@@ -20,7 +20,6 @@ public class LinuxCondition implements Condition {
 
         Environment environment = context.getEnvironment();
 
-
         boolean hasPerson = registry.containsBeanDefinition("person");
         if (hasPerson) {
             return true;
