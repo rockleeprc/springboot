@@ -13,10 +13,7 @@ import java.util.Map;
 
 public class Bootstrap {
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AutowiredConfiguration.class);
-        Man man = context.getBean(Man.class);
-        System.out.println(man);
-        context.close();
+        m3();
     }
 
     /**
@@ -26,6 +23,7 @@ public class Bootstrap {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProcessorConfiguration.class);
         context.publishEvent(new ApplicationEvent(new String("自定义事件")) {
         });
+        Person person = context.getBean(Person.class);
         context.close();
     }
 
