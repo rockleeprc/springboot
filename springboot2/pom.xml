@@ -11,6 +11,9 @@
     <modules>
         <module>01_hello_world</module>
         <module>02_autowired_config</module>
+        <module>03_static_resources</module>
+        <module>04_thymeleaf</module>
+        <module>05_springmvc</module>
     </modules>
 
 
