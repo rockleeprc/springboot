@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
-@ServletComponentScan(basePackages = "com.example.servlet")
+@ServletComponentScan//(basePackages = {"com.example6.servlet"})
 public class ServletApplication {
 
     public static void main(String[] args) {
