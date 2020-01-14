@@ -17,6 +17,8 @@
         <module>06_servlet</module>
         <module>07_application</module>
         <module>08_datasource</module>
+        <module>09_annotation</module>
+        <module>10_event</module>
     </modules>
 
 

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 @Slf4j
@@ -40,13 +39,13 @@ public class DoubleDataSourceConfig {
     }
 
     @Bean
-    @Resource
+//    @Resource
     public PlatformTransactionManager fooTxManager(DataSource fooDataSource) {
         return new DataSourceTransactionManager(fooDataSource);
     }
 
     @Bean
-    @Resource
+//    @Resource
     public PlatformTransactionManager barTxManager(DataSource fooDataSource) {
         return new DataSourceTransactionManager(fooDataSource);
     }
