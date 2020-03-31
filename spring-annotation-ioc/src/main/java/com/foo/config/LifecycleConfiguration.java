@@ -1,8 +1,8 @@
 package com.foo.config;
 
-import com.foo.bean.*;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.BeanPostProcessor;
+import com.foo.bean.Blue;
+import com.foo.bean.Red;
+import com.foo.bean.Yellow;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -10,18 +10,18 @@ import org.springframework.context.annotation.Configuration;
 public class LifecycleConfiguration {
 
     //    @Scope("prototype")
-    //    @Bean(initMethod = "init", destroyMethod = "destroy")
+//    @Bean(initMethod = "init", destroyMethod = "destroy")
     public Red red() {
         return new Red();
     }
 
-    //    @Scope("prototype")
-    //    @Bean
+//    @Scope("prototype")
+//    @Bean
     public Blue blue() {
         return new Blue();
     }
 
-    @Bean
+        @Bean
     public Yellow yellow() {
         return new Yellow();
     }

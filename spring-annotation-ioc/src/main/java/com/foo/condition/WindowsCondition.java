@@ -13,7 +13,7 @@ import java.util.Arrays;
 public class WindowsCondition implements Condition {
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-        ClassLoader classLoader = context.getClassLoader();
+            ClassLoader classLoader = context.getClassLoader();
         BeanDefinitionRegistry registry = context.getRegistry();
         ResourceLoader resourceLoader = context.getResourceLoader();
         Environment environment = context.getEnvironment();

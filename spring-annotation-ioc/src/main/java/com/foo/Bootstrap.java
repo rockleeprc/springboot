@@ -1,19 +1,28 @@
 package com.foo;
 
-import com.foo.bean.*;
-import com.foo.config.*;
+import com.foo.bean.Cat;
+import com.foo.bean.Green;
+import com.foo.bean.GreenFactoryBean;
+import com.foo.bean.Person;
+import com.foo.config.BeanConfiguration;
+import com.foo.config.ProcessorConfiguration;
+import com.foo.config.ProfileConfiguration;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.Lifecycle;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.context.annotation.Profile;
-import org.springframework.core.env.ConfigurableEnvironment;
 
 import java.util.Map;
 
 public class Bootstrap {
     public static void main(String[] args) {
-        m3();
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
+
+        Green green = context.getBean("green",Green.class);
+        System.out.println("88888888"+green);
+        GreenFactoryBean factoryBean = context.getBean("&green", GreenFactoryBean.class);
+        System.out.println("7777777"+factoryBean);
+
+        context.close();
     }
 
     /**
