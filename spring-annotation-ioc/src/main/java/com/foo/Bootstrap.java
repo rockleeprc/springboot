@@ -7,6 +7,7 @@ import com.foo.bean.Person;
 import com.foo.config.BeanConfiguration;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
+import com.foo.servervice.PersonService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -17,10 +18,8 @@ public class Bootstrap {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 
-        Green green = context.getBean("green",Green.class);
-        System.out.println("88888888"+green);
-        GreenFactoryBean factoryBean = context.getBean("&green", GreenFactoryBean.class);
-        System.out.println("7777777"+factoryBean);
+        PersonService service = context.getBean(PersonService.class);
+        service.print();
 
         context.close();
     }
