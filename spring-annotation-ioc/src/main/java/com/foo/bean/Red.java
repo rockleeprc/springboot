@@ -1,6 +1,7 @@
 package com.foo.bean;
 
 public class Red {
+    private String message;
 
     public Red() {
         System.out.println("Red.Read()...");
@@ -12,5 +13,20 @@ public class Red {
 
     public void destroy() {
         System.out.println("Red.destroy()...");
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String toString() {
+        return "Red{" +
+                "message='" + message + '\'' +
+                '}';
     }
 }

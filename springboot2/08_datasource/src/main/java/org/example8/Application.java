@@ -1,14 +1,49 @@
 package org.example8;
 
-import org.springframework.boot.SpringApplication;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.jdbc.core.JdbcTemplate;
 
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.Map;
+
+//@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
+@SpringBootApplication
 public class Application {
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private DataSource dataSource;
+
+    public static void main(String[] args) throws SQLException {
+        ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class)
+                .web(WebApplicationType.NONE)
+                .run(args);
+
+        Map<String, DataSource> map = context.getBeansOfType(DataSource.class);
+        System.out.println(map);
+
+        HikariDataSource ds = context.getBean(HikariDataSource.class);
+        System.out.println(ds.getMaximumPoolSize());
+
+        Connection connection = ds.getConnection();
+        System.out.println(connection);
+
+        context.close();
+
     }
+
+//    @Bean
+    public DataSource dataSource() {
+        HikariDataSource ds = new HikariDataSource();
+//        ds.setMetricRegistry();
+        return ds;
+    }
+
 }
