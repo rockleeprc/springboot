@@ -5,6 +5,7 @@ import com.foo.bean.Person;
 import com.foo.bean.Yellow;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
+import com.foo.servervice.PersonService;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -45,6 +46,8 @@ public class Bootstrap {
         BeanDefinitionReaderUtils.registerWithGeneratedName(genericBeanDefinition, context);
         Map<String, Yellow> map = context.getBeansOfType(Yellow.class);
         System.out.println(map);
+        PersonService service = context.getBean(PersonService.class);
+        service.print();
 
         context.close();
     }
