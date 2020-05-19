@@ -3,6 +3,7 @@ package com.foo.config;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
+import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,6 +31,11 @@ public class ProcessorConfiguration {
     @Bean
     public ApplicationListener applicationListener() {
         return new MyApplicationListener();
+    }
+
+    @Bean
+    public ApplicationContextInitializer applicationContextInitializer() {
+        return new SpringApplicationContextInitializer();
     }
 
 }

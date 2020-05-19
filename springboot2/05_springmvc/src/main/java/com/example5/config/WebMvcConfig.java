@@ -42,5 +42,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.addInterceptor(new MyInterceptor())
                 .addPathPatterns("/**")
                 .excludePathPatterns("/index");
+        registry.addInterceptor(new ValidParamsInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/index");
     }
 }
