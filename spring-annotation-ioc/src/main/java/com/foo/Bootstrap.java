@@ -3,7 +3,6 @@ package com.foo;
 import com.foo.bean.Cat;
 import com.foo.bean.Person;
 import com.foo.bean.Yellow;
-import com.foo.config.BeanConfiguration;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
 import com.foo.servervice.PersonService;
@@ -17,12 +16,37 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Bootstrap {
-    public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(BeanConfiguration.class);
 
-        context.close();
+    public static void main(String[] args) {
+    }
+
+    private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
+
+    static {
+        aliasMap.put("A", "AAA");
+        aliasMap.put("A", "AA");
+        aliasMap.put("B", "BB");
+    }
+
+    /**
+     * 有趣的map去重方法
+     *
+     * @param name
+     * @return
+     */
+    public static String canonicalName(String name) {
+        String result = name;
+        String temp;
+        do {
+            temp = aliasMap.get(result);
+            if (temp != null) {
+                result = temp;
+            }
+        } while (temp != null);
+        return result;
     }
 
     /**
