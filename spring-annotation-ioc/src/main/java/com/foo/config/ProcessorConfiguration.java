@@ -27,7 +27,6 @@ public class ProcessorConfiguration {
         return new MyBeanDefinitionRegistryPostProcessor();
     }
 
-
     @Bean
     public ApplicationListener applicationListener() {
         return new MyApplicationListener();

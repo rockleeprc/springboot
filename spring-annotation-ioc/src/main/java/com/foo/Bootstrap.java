@@ -3,6 +3,7 @@ package com.foo;
 import com.foo.bean.Cat;
 import com.foo.bean.Person;
 import com.foo.bean.Yellow;
+import com.foo.config.OrderedConfiguration;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
 import com.foo.servervice.PersonService;
@@ -21,6 +22,8 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Bootstrap {
 
     public static void main(String[] args) {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(OrderedConfiguration.class);
+        context.close();
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);

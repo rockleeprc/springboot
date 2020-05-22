@@ -5,6 +5,9 @@ import org.springframework.context.ApplicationContextInitializer;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.Ordered;
 
+/**
+ * META-INF\spring.factories 中配置
+ */
 public class MyApplicationContextInitializer implements ApplicationContextInitializer, Ordered {
     @Override
     public void initialize(ConfigurableApplicationContext applicationContext) {
