@@ -3,9 +3,9 @@ package com.foo.order;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.core.Ordered;
+import org.springframework.core.PriorityOrdered;
 
-public class SecondBeanFactoryPostProcessor implements BeanFactoryPostProcessor, Ordered {
+public class SecondBeanFactoryPostProcessor implements BeanFactoryPostProcessor, PriorityOrdered {
 //    @Override
 //    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 //        System.out.println("SecondBeanPostProcessor before");
@@ -20,7 +20,7 @@ public class SecondBeanFactoryPostProcessor implements BeanFactoryPostProcessor,
 
     @Override
     public int getOrder() {
-        return LOWEST_PRECEDENCE;
+        return HIGHEST_PRECEDENCE;
     }
 
     @Override

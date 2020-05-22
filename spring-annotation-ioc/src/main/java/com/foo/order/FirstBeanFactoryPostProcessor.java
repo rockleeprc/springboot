@@ -20,7 +20,7 @@ public class FirstBeanFactoryPostProcessor implements BeanFactoryPostProcessor, 
 
     @Override
     public int getOrder() {
-        return LOWEST_PRECEDENCE;
+        return HIGHEST_PRECEDENCE+1;
     }
 
     @Override
