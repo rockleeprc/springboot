@@ -26,14 +26,6 @@ public class Application {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        Map<String, DataSource> map = context.getBeansOfType(DataSource.class);
-        System.out.println(map);
-
-        HikariDataSource ds = context.getBean(HikariDataSource.class);
-        System.out.println(ds.getMaximumPoolSize());
-
-        Connection connection = ds.getConnection();
-        System.out.println(connection);
 
         context.close();
 

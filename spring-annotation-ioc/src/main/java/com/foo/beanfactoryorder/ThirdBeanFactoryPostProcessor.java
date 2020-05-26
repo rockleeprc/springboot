@@ -1,4 +1,4 @@
-package com.foo.order;
+package com.foo.beanfactoryorder;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;

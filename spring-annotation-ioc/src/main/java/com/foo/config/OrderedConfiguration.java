@@ -1,8 +1,8 @@
 package com.foo.config;
 
-import com.foo.order.FirstBeanFactoryPostProcessor;
-import com.foo.order.SecondBeanFactoryPostProcessor;
-import com.foo.order.ThirdBeanFactoryPostProcessor;
+import com.foo.beanfactoryorder.FirstBeanFactoryPostProcessor;
+import com.foo.beanfactoryorder.SecondBeanFactoryPostProcessor;
+import com.foo.beanfactoryorder.ThirdBeanFactoryPostProcessor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 

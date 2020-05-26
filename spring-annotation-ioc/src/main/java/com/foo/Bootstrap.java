@@ -3,7 +3,6 @@ package com.foo;
 import com.foo.bean.Cat;
 import com.foo.bean.Person;
 import com.foo.bean.Yellow;
-import com.foo.config.OrderedConfiguration;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
 import com.foo.servervice.PersonService;
@@ -16,15 +15,17 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Bootstrap {
 
     public static void main(String[] args) {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(OrderedConfiguration.class);
-
-        context.close();
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
