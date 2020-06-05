@@ -5,9 +5,11 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 public class JsonUtils {
     private static final ObjectMapper mapper = new ObjectMapper();
+//    ObjectMapper mapper = Jackson2ObjectMapperBuilder.json().build();
 
     static {
         // 美化输出

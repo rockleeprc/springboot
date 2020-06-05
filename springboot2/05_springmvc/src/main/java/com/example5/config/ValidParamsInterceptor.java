@@ -19,6 +19,7 @@ import javax.validation.constraints.Size;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
+@Deprecated
 public class ValidParamsInterceptor extends HandlerInterceptorAdapter {
     private static Logger LOG = LoggerFactory.getLogger(ValidParamsInterceptor.class);
 
@@ -84,7 +85,7 @@ public class ValidParamsInterceptor extends HandlerInterceptorAdapter {
             }
 
             if (parameter.isAnnotationPresent(Size.class)
-            && (ValidUtils.isSize(value))) {
+                    && (ValidUtils.isSize(value))) {
             }
         }
         return sb.toString();

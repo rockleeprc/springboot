@@ -1,5 +1,6 @@
 package com.example5.util;
 
+@Deprecated
 public class ValidUtils {
 
     public static boolean isNull(String value) {
