@@ -15,25 +15,45 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Bootstrap {
 
     public static void main(String[] args) {
-        List<Integer> list = new ArrayList<>();
-        list.add(1);
-        list.add(2);
+        System.out.println(canonicalName("A"));
+        ReentrantLock lock = new ReentrantLock();
+        Thread t1 = new Thread(() -> {
+            lock.lock();
+            try {
+                while (true) ;
+            } finally {
+                lock.unlock();
+            }
+        }, "t1");
+        Thread t2 = new Thread(() -> {
+            lock.lock();
+            try {
+                while (true) ;
+            } finally {
+                lock.unlock();
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+
+        while (true) ;
+
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
 
     static {
-        aliasMap.put("A", "AAA");
+        aliasMap.put("AA", "AAA");
         aliasMap.put("A", "AA");
-        aliasMap.put("B", "BB");
+        aliasMap.put("AAA", "BB");
     }
 
     /**
