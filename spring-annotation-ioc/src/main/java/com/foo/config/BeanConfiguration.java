@@ -1,7 +1,6 @@
 package com.foo.config;
 
 
-import com.foo.bean.Green;
 import com.foo.bean.GreenFactoryBean;
 import com.foo.bean.Person;
 import com.foo.bean.Red;
@@ -9,6 +8,9 @@ import com.foo.condition.LinuxCondition;
 import com.foo.condition.WindowsCondition;
 import com.foo.impord.MyImport;
 import com.foo.impord.MyImportRegister;
+import org.springframework.beans.factory.SmartInitializingSingleton;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.annotation.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -24,7 +26,7 @@ import org.springframework.stereotype.Service;
  */
 @Configuration
 @ComponentScan(basePackages = "com.foo")
-@ComponentScan(value={"",""},includeFilters = @ComponentScan.Filter(value={Controller.class, Service.class}),useDefaultFilters = false)
+@ComponentScan(value = {"", ""}, includeFilters = @ComponentScan.Filter(value = {Controller.class, Service.class}), useDefaultFilters = false)
 @Import({Red.class, MyImport.class, MyImportRegister.class})
 public class BeanConfiguration {
 
@@ -50,6 +52,20 @@ public class BeanConfiguration {
     @Bean
     public GreenFactoryBean green() {
         return new GreenFactoryBean();
+    }
+
+    @Bean
+    public SmartInitializingSingleton smartInitializingSingleton() {
+
+        return new SmartInitializingSingleton() {
+            @Autowired
+            private DefaultListableBeanFactory defaultListableBeanFactory;
+
+            @Override
+            public void afterSingletonsInstantiated() {
+                System.out.println("99999999999999" + defaultListableBeanFactory.getSingletonCount());
+            }
+        };
     }
 }
 /*

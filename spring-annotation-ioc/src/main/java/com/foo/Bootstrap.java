@@ -16,10 +16,62 @@ import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class Bootstrap {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
+        System.out.println(canonicalName("A"));
+        ReentrantLock lock = new ReentrantLock();
+        Thread t1 = new Thread(() -> {
+            lock.lock();
+            try {
+                while (true) ;
+            } finally {
+                lock.unlock();
+            }
+        }, "t1");
+        Thread t2 = new Thread(() -> {
+            lock.lock();
+            try {
+                while (true) ;
+            } finally {
+                lock.unlock();
+            }
+        }, "t2");
+
+        t1.start();
+        t2.start();
+
+        while (true) ;
+
+    }
+
+    private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
+
+    static {
+        aliasMap.put("AA", "AAA");
+        aliasMap.put("A", "AA");
+        aliasMap.put("AAA", "BB");
+    }
+
+    /**
+     * 有趣的map去重方法
+     *
+     * @param name
+     * @return
+     */
+    public static String canonicalName(String name) {
+        String result = name;
+        String temp;
+        do {
+            temp = aliasMap.get(result);
+            if (temp != null) {
+                result = temp;
+            }
+        } while (temp != null);
+        return result;
     }
 
     /**

@@ -12,8 +12,8 @@ public class Application {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
-
-        context.addApplicationListener(event -> System.out.println(event));
+        
+//        context.addApplicationListener(event -> System.out.println(event));
         context.publishEvent(new ApplicationEvent("hello event") {
             @Override
             public Object getSource() {
