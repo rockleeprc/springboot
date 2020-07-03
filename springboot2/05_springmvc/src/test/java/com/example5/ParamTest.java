@@ -1,4 +1,4 @@
-package com.example;
+package com.example5;
 
 import com.example5.controller.ParamController;
 import org.springframework.core.DefaultParameterNameDiscoverer;
