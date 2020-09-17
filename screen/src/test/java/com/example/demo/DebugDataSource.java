@@ -1,5 +1,6 @@
-package com.kd;
+package com.example.demo;
 
+import com.kd.ScreenApplicaton;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
