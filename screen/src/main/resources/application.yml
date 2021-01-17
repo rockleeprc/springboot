@@ -2,6 +2,11 @@ debug:
   false
 
 spring:
+  mvc:
+    date-format: yyyy-MM-dd
+  jackson:
+    date-format: yyyy-MM-dd
+    time-zone: Asia/Shanghai
   datasource:
     url: jdbc:impala://39.96.216.143:21051
     username:
