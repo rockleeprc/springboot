@@ -2,5 +2,5 @@ spring:
   mvc:
     date-format: yyyy-MM-dd
   jackson:
-    date-format: yyyy-MM-dd
-    time-zone: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
