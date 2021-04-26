@@ -1,0 +1,44 @@
+server:
+  port: 8002
+  tomcat:
+    accesslog:
+      enabled: true
+      #directory: D:/data/microservices/tomcat/provider-bar
+
+spring:
+  mvc:
+    dateFormat: yyyy-MM-dd HH:mm:ss
+  jackson:
+    dateFormat: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:impala://39.96.216.143:21051
+    username:
+    password:
+    driver-class-name: com.cloudera.impala.jdbc41.Driver
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 10
+      idle-timeout: 600000
+      connection-timeout: 5000
+      pool-name: ImpalaHikariCP
+      connection-test-query: SELECT 1
+
+mybatis:
+  typeAliasesPackage: cn.kd.entity
+  mapperLocations: classpath:mapper/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+    defaultStatementTimeout: 30
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
+pagehelper:
+  helperDialect: impala
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  pageSizeZero: true
+  dialectAlias: impala=com.github.pagehelper.dialect.helper.HsqldbDialect
+
+
