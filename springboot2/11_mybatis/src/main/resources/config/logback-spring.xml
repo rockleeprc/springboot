@@ -51,11 +51,11 @@
     </springProfile>
 
     <springProfile name="dev">
-        <root level="DEBUG">
+        <root level="INFO">
             <appender-ref ref="STDOUT"/>
             <appender-ref ref="asyncFileAppender"/>
         </root>
-        <logger name="cn.kd.mapper" level="INFO">
+        <logger name="cn.kd.mapper" level="DEBUG">
             <!--<appender-ref ref="FILE"/>-->
             <appender-ref ref="asyncFileAppender"/>
         </logger>
