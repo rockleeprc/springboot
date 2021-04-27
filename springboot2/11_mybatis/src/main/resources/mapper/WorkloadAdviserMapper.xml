@@ -1,0 +1,477 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.kd.mapper.WorkloadAdviserMapper">
+    <select id="selectWorkloadAdviser" resultType="cn.kd.entity.view.WorkloadAdviserView">
+        with
+        <include refid="agent_clue_circulation_adviser_customer"/>,
+        <include refid="agent_clue_circulation_adviser_total_customer"/>,
+        <include refid="agent_clue_tracking_adviser_customer"/>,
+        <include refid="agent_call_record_adviser_talk_time"/>,
+        <include refid="customer_info_adviser_im"/>,
+        <include refid="message_record_adviser_reply"/>,
+        <include refid="agent_brand_match_adviser_quantity"/>,
+        <include refid="agent_brand_match_adviser_agent_brand"/>,
+        <include refid="agent_brand_match_adviser_ad_brand"/>,
+        <include refid="workload_adviser_union"/>
+        select
+        wau.adviser_id, <!-- 顾问 -->
+        ui.name as adviser_name, <!-- 顾问名称 -->
+        wau.new_customer, <!-- 新客户数 -->
+        wau.total_customer, <!-- 客户总数 -->
+        wau.im_submit_customer, <!-- IM提交客户数 -->
+        wau.tracking_customer, <!-- 跟进客户数 -->
+        wau.tracking_quantity, <!-- 跟进次数 -->
+        wau.talk_time_second, <!-- 通话时长 -->
+        wau.im_receive_customer, <!-- im接待客户 -->
+        wau.reply_customer, <!-- 回复客户数 -->
+        wau.reply_quantity,<!-- 回复记录数 -->
+        wau.match_submit_quantity, <!-- 匹配提交次数 -->
+        wau.match_brand_quantity, <!-- 匹配品牌个数 -->
+        wau.match_agent_brand_quantity, <!-- 匹配品牌个数（经纪品牌) -->
+        wau.match_ad_brand_quantity <!-- 匹配品牌个数（广告品牌） -->
+        from workload_adviser_union wau
+        left join sc.ods_hju_t_user_info ui on wau.adviser_id=ui.id
+    </select>
+
+
+    <sql id="workload_adviser_union">
+        workload_adviser_union as(
+        select
+        t.adviser_id, <!-- 顾问 -->
+        sum(t.new_customer) as new_customer, <!-- 新客户数 -->
+        sum(t.total_customer) as total_customer, <!-- 客户总数 -->
+        sum(t.im_submit_customer) as im_submit_customer, <!-- IM提交客户数 -->
+        sum(t.tracking_customer) tracking_customer, <!-- 跟进客户数 -->
+        sum(t.tracking_quantity) as tracking_quantity, <!-- 跟进次数 -->
+        sum(t.talk_time_second) as talk_time_second, <!-- 通话时长 -->
+        sum(t.im_receive_customer) as im_receive_customer, <!-- im接待客户 -->
+        sum(t.reply_customer) as reply_customer, <!-- 回复客户数 -->
+        sum(t.reply_quantity) as reply_quantity,<!-- 回复记录数 -->
+        sum(t.match_submit_quantity) as match_submit_quantity, <!-- 匹配提交次数 -->
+        sum(t.match_brand_quantity) as match_brand_quantity, <!-- 匹配品牌个数 -->
+        sum(t.match_agent_brand_quantity) as match_agent_brand_quantity, <!-- 匹配品牌个数（经纪品牌) -->
+        sum(t.match_ad_brand_quantity) as match_ad_brand_quantity <!-- 匹配品牌个数（广告品牌） -->
+        from (
+        select
+        adviser_id,
+        new_customer,<!--新客户数-->
+        im_submit_customer,<!--im提交客户数-->
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from agent_clue_circulation_adviser_customer
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        total_customer, <!--客户总数-->
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from agent_clue_circulation_adviser_total_customer
+        union all
+        select
+        adviser_id,
+        0 as new_customers,
+        0 as im_submit_customer,
+        0 as total_customer,
+        tracking_customer, <!--跟进客户数-->
+        tracking_quantity, <!--跟进次数-->
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from agent_clue_tracking_adviser_customer
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        talk_time_second, <!--通话时长-->
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from agent_call_record_adviser_talk_time
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        im_receive_customer, <!--im接待新客户数-->
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from customer_info_adviser_im
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        reply_customer, <!--回复客户数-->
+        reply_quantity, <!--回复记录数-->
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from message_record_adviser_reply
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        match_submit_quantity, <!--匹配提交次数-->
+        match_brand_quantity, <!--匹配品牌个数-->
+        0 as match_agent_brand_quantity,
+        0 as match_ad_brand_quantity
+        from agent_brand_match_adviser_quantity
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        match_agent_brand_quantity, <!--匹配品牌个数（经纪品牌）-->
+        0 as match_ad_brand_quantity
+        from agent_brand_match_adviser_agent_brand
+        union all
+        select
+        adviser_id,
+        0 as new_customer,
+        0 as im_submit_customer,
+        0 as total_customer,
+        0 as tracking_customer,
+        0 as tracking_quantity,
+        0 as talk_time_second,
+        0 as im_receive_customer,
+        0 as reply_customer,
+        0 as reply_quantity,
+        0 as match_submit_quantity,
+        0 as match_brand_quantity,
+        0 as match_agent_brand_quantity,
+        match_ad_brand_quantity <!--匹配品牌个数广告品牌-->
+        from agent_brand_match_adviser_ad_brand
+        ) t
+        group by t.adviser_id
+        )
+    </sql>
+
+    <sql id="agent_clue_circulation_adviser_customer">
+        agent_clue_circulation_adviser_customer as (
+        select
+        serve_user_id as adviser_id,
+        serve_group_id as adviser_group_id,
+        count(1) as new_customer, <!--新客户数 -->
+        sum(case when agent_circulation_type=1 then 1 else 0 end) as im_submit_customer <!--im提交客户数-->
+        from sc.dw_hju_t_agent_clue_circulation
+        where 1=1
+        and is_first_circulation=1
+        and serve_role_id=(select id from sc.ods_hju_t_role where role_code='JMGW') <!--加盟顾问角色id -->
+        <!--动态条件-->
+        <if test="startTime!=null and endTime!=null">
+            and circulation_time&gt;=#{startTime}
+            and circulation_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and serve_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and serve_user_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by serve_user_id,serve_group_id
+        )
+    </sql>
+    <sql id="agent_clue_circulation_adviser_total_customer">
+        agent_clue_circulation_adviser_total_customer as (
+        select
+        serve_user_id as adviser_id,
+        serve_group_id as adviser_group_id,
+        count(1) as total_customer <!--客户总数 -->
+        from sc.dw_hju_t_agent_clue_circulation
+        where 1=1
+        and is_first_circulation=1
+        and serve_role_id=(select id from sc.ods_hju_t_role where role_code='JMGW') <!-- 加盟顾问角色id -->
+        <!--动态条件 -->
+        <if test="groupIds!=null"> <!-- 组id -->
+            and serve_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and serve_user_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by serve_user_id,serve_group_id
+        )
+    </sql>
+    <sql id="agent_clue_tracking_adviser_customer">
+        agent_clue_tracking_adviser_customer as (
+        select
+        tracking_user_id as adviser_id,
+        tracking_group_id as adviser_group_id,
+        count(distinct clue_id) as tracking_customer, <!--跟进客户数 -->
+        count(1) as tracking_quantity <!--跟进次数 -->
+        from sc.dw_hju_t_agent_clue_tracking
+        where 1=1
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and tracking_time&gt;=#{startTime}
+            and tracking_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and tracking_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and tracking_user_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by tracking_user_id,tracking_group_id
+        )
+    </sql>
+    <sql id="agent_call_record_adviser_talk_time">
+        agent_call_record_adviser_talk_time as (
+        select
+        user_id as adviser_id,
+        group_id as adviser_group_id,
+        sum(talk_time_second) as talk_time_second <!--通话时长 -->
+        from sc.dw_hju_t_agent_call_record
+        where 1=1
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and bridge_time&gt;=#{startTime}
+            and bridge_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and user_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by user_id,group_id
+        )
+    </sql>
+    <sql id="customer_info_adviser_im">
+        customer_info_adviser_im as (
+        select
+        adviser_id,
+        adviser_group_id,
+        count(distinct customer_account_id) as im_receive_customer <!--im接待新客户数 -->
+        from sc.dw_hju_t_customer_info
+        where 1=1
+        and adviser_status=1
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and create_time&gt;=#{startTime}
+            and create_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and adviser_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and adviser_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by adviser_id,adviser_group_id
+        )
+    </sql>
+    <sql id="message_record_adviser_reply">
+        message_record_adviser_reply as (
+        select
+        adviser_id,
+        adviser_group_id,
+        count(distinct customer_id) as reply_customer, <!--回复客户数 -->
+        count(1) as reply_quantity <!--回复记录数 -->
+        from sc.dw_hju_t_message_record
+        where 1=1
+        and ext_message_type!=2
+        and cus_is=1
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and message_send_time&gt;=#{startTime}
+            and message_send_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and adviser_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and adviser_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by adviser_id,adviser_group_id
+        )
+    </sql>
+    <sql id="agent_brand_match_adviser_quantity">
+        agent_brand_match_adviser_quantity as (
+        select
+        adviser_id,
+        adviser_group_id,
+        count(distinct union_id) as match_submit_quantity, <!--匹配提交次数 -->
+        count(distinct brand_id) as match_brand_quantity <!--匹配品牌个数 -->
+        from sc.dw_hju_t_agent_brand_match
+        where 1=1
+        and submit_status=0
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and match_time&gt;=#{startTime}
+            and match_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and adviser_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and adviser_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by adviser_id,adviser_group_id
+        )
+    </sql>
+    <sql id="agent_brand_match_adviser_agent_brand">
+        agent_brand_match_adviser_agent_brand as (
+        select
+        adviser_id,
+        adviser_group_id,
+        count(distinct brand_id) as match_agent_brand_quantity <!--匹配品牌个数（经纪品牌） -->
+        from sc.dw_hju_t_agent_brand_match
+        where 1=1
+        and submit_status=0
+        and brand_type=1
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and match_time&gt;=#{startTime}
+            and match_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and adviser_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and adviser_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by adviser_id,adviser_group_id
+        )
+    </sql>
+    <sql id="agent_brand_match_adviser_ad_brand">
+        agent_brand_match_adviser_ad_brand as (
+        select
+        adviser_id,
+        adviser_group_id,
+        count(distinct brand_id) as match_ad_brand_quantity <!--匹配品牌个数（广告品牌） -->
+        from sc.dw_hju_t_agent_brand_match
+        where 1=1
+        and submit_status=0
+        and brand_type=2
+        <!--动态条件 -->
+        <if test="startTime!=null and endTime!=null">
+            and match_time&gt;=#{startTime}
+            and match_time&lt;=#{endTime}
+        </if>
+        <if test="groupIds!=null"> <!-- 组id -->
+            and adviser_group_id in
+            <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="adviserIds!=null">
+            and adviser_id in
+            <foreach collection="adviserIds" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        group by adviser_id,adviser_group_id
+        )
+    </sql>
+</mapper>

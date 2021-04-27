@@ -20,7 +20,7 @@ import javax.validation.constraints.Size;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
-//@Component
+@Component
 public class ValidParamsInterceptor extends HandlerInterceptorAdapter {
     private static Logger LOG = LoggerFactory.getLogger(ValidParamsInterceptor.class);
 
