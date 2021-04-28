@@ -32,6 +32,7 @@
         wagu.match_ad_brand_quantity <!-- 匹配品牌个数（广告品牌） -->
         from workload_adviser_group_union wagu
         left join sc.ods_hju_t_organization org on wagu.adviser_group_id=org.id
+        order by wagu.adviser_group_id
     </select>
     <sql id="workload_adviser_group_union">
         workload_adviser_group_union as (
@@ -453,6 +454,7 @@
         wau.match_ad_brand_quantity <!-- 匹配品牌个数（广告品牌） -->
         from workload_adviser_union wau
         left join sc.ods_hju_t_user_info ui on wau.adviser_id=ui.id
+        order by wau.adviser_id
     </select>
 
 

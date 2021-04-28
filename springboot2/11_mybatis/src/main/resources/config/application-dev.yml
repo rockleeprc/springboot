@@ -7,10 +7,11 @@ server:
 
 spring:
   mvc:
-    dateFormat: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
   jackson:
-    dateFormat: yyyy-MM-dd HH:mm:ss
+    date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+    default-property-inclusion: non_null
   datasource:
     url: jdbc:impala://39.96.216.143:21051
     username:
@@ -37,6 +38,7 @@ pagehelper:
   helperDialect: impala
   reasonable: true
   supportMethodsArguments: true
+  offsetAsPageNum: true
   params: count=countSql
   pageSizeZero: true
   dialectAlias: impala=com.github.pagehelper.dialect.helper.HsqldbDialect

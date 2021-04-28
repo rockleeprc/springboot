@@ -9,7 +9,7 @@ public class WorkloadAdviser implements Serializable {
     private Long adviserId; // 顾问id
     private String adviserName; // 顾问名称
     private Long adviserGroupId; // 顾问组id
-    private String adviserGroupIdName;// 顾问组名称
+    private String adviserGroupName;// 顾问组名称
     private Long newCustomer; // 新客户数
     private Long totalCustomer; // 客户总数
     private Long imSubmitCustomer;// IM提交客户数
@@ -32,12 +32,12 @@ public class WorkloadAdviser implements Serializable {
         this.adviserGroupId = adviserGroupId;
     }
 
-    public String getAdviserGroupIdName() {
-        return adviserGroupIdName;
+    public String getAdviserGroupName() {
+        return adviserGroupName;
     }
 
-    public void setAdviserGroupIdName(String adviserGroupIdName) {
-        this.adviserGroupIdName = adviserGroupIdName;
+    public void setAdviserGroupName(String adviserGroupName) {
+        this.adviserGroupName = adviserGroupName;
     }
 
     public Long getAdviserId() {

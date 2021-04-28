@@ -21,9 +21,20 @@ public class AdviserController {
     public Result workloadAdviser(@RequestParam(value = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
                                   @RequestParam(value = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
                                   @RequestParam(name = "groupIds", required = false) Long[] groupIds,
-                                  @RequestParam(name = "adviserIds", required = false) Long[] adviserIds) {
-        return Result.success(adviserService.selectWorkloadAdviser(startTime, endTime, groupIds, adviserIds));
+                                  @RequestParam(name = "adviserIds", required = false) Long[] adviserIds,
+                                  @RequestParam(name = "pageNum", required = false) @Valid @NotNull(message = "不能为空") Integer pageNum,
+                                  @RequestParam(name = "pageSize", required = false) @Valid @NotNull(message = "不能为空") Integer pageSize) {
+        return Result.success(adviserService.selectWorkloadAdviser(startTime, endTime, groupIds, adviserIds, pageNum, pageSize));
     }
 
+
+    @PostMapping("/workloadAdviserGroup")
+    public Result workloadAdviserGroup(@RequestParam(value = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
+                                       @RequestParam(value = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
+                                       @RequestParam(name = "groupIds", required = false) Long[] groupIds,
+                                       @RequestParam(name = "pageNum", required = false) @Valid @NotNull(message = "不能为空") Integer pageNum,
+                                       @RequestParam(name = "pageSize", required = false) @Valid @NotNull(message = "不能为空") Integer pageSize) {
+        return Result.success(adviserService.selectWorkloadAdviserGroup(startTime, endTime, groupIds, pageNum, pageSize));
+    }
 
 }
