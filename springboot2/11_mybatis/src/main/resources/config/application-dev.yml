@@ -26,11 +26,11 @@ spring:
       connection-test-query: SELECT 1
 
 mybatis:
-  typeAliasesPackage: cn.kd.entity
-  mapperLocations: classpath:mapper/*Mapper.xml
+  type-aliases-package: cn.kd.entity
+  mapper-locations: classpath:mapper/*Mapper.xml
   configuration:
-    mapUnderscoreToCamelCase: true
-    defaultStatementTimeout: 30
+    map-underscore-to-camelCase: true
+    default-statement-timeout: 30
     lazy-loading-enabled: true
     aggressive-lazy-loading: false
 
