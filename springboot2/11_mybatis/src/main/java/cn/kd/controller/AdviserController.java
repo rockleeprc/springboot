@@ -17,7 +17,7 @@ public class AdviserController {
     @Autowired
     private AdviserService adviserService;
 
-    @GetMapping("/workloadAdviser")
+    @PostMapping("/workloadAdviser")
     public Result workloadAdviser(@RequestParam(value = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
                                   @RequestParam(value = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
                                   @RequestParam(name = "groupIds", required = false) Long[] groupIds,

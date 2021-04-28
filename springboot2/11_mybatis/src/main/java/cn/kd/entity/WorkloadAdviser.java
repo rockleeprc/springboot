@@ -2,9 +2,14 @@ package cn.kd.entity;
 
 import java.io.Serializable;
 
+/**
+ * 顾问/组 工作量和产出表实体对象
+ */
 public class WorkloadAdviser implements Serializable {
     private Long adviserId; // 顾问id
     private String adviserName; // 顾问名称
+    private Long adviserGroupId; // 顾问组id
+    private String adviserGroupIdName;// 顾问组名称
     private Long newCustomer; // 新客户数
     private Long totalCustomer; // 客户总数
     private Long imSubmitCustomer;// IM提交客户数
@@ -18,6 +23,22 @@ public class WorkloadAdviser implements Serializable {
     private Long matchBrandQuantity;// 匹配品牌个数
     private Long matchAgentBrandQuantity;// 匹配品牌个数（经纪品牌)
     private Long matchAdBrandQuantity;// 匹配品牌个数（广告品牌）
+
+    public Long getAdviserGroupId() {
+        return adviserGroupId;
+    }
+
+    public void setAdviserGroupId(Long adviserGroupId) {
+        this.adviserGroupId = adviserGroupId;
+    }
+
+    public String getAdviserGroupIdName() {
+        return adviserGroupIdName;
+    }
+
+    public void setAdviserGroupIdName(String adviserGroupIdName) {
+        this.adviserGroupIdName = adviserGroupIdName;
+    }
 
     public Long getAdviserId() {
         return adviserId;

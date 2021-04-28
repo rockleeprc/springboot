@@ -26,4 +26,13 @@ public class WorkloadAdviserMapperTest {
         List<WorkloadAdviserView> list = workloadAdviserMapper.selectWorkloadAdviser(startTime, endTime, groupIds, adviserIds);
         System.out.println(list);
     }
+
+    @Test
+    public void testSelectWorkloadAdviserGroup() {
+        String startTime = "2021-04-26";
+        String endTime = "2021-04-26";
+        Long[] groupIds = {1L, 2L};
+        List<WorkloadAdviserView> list = workloadAdviserMapper.selectWorkloadAdviserGroup(startTime, endTime, groupIds);
+        System.out.println(list);
+    }
 }
