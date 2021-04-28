@@ -18,8 +18,8 @@ public class AdviserController {
     private AdviserService adviserService;
 
     @GetMapping("/workloadAdviser")
-    public Result workloadAdviser(@RequestParam(value = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}[\\d]{2}[\\d]{2}", message = "日期格式:yyyyMMdd") String startTime,
-                                  @RequestParam(value = "endTime", required = false) @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}[\\d]{2}[\\d]{2}", message = "日期格式:yyyyMMdd") String endTime,
+    public Result workloadAdviser(@RequestParam(value = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
+                                  @RequestParam(value = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
                                   @RequestParam(name = "groupIds", required = false) Long[] groupIds,
                                   @RequestParam(name = "adviserIds", required = false) Long[] adviserIds) {
         return Result.success(adviserService.selectWorkloadAdviser(startTime, endTime, groupIds, adviserIds));
