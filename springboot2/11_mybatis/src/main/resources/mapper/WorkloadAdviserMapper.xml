@@ -224,7 +224,6 @@
             and match_time&gt;=#{startTime}
             and match_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and adviser_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -248,7 +247,6 @@
             and match_time&gt;=#{startTime}
             and match_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and adviser_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -273,7 +271,6 @@
             and match_time&gt;=#{startTime}
             and match_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and adviser_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -299,7 +296,6 @@
             and message_send_time&gt;=#{startTime}
             and message_send_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and adviser_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -322,7 +318,6 @@
             and create_time&gt;=#{startTime}
             and create_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and adviser_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -345,7 +340,6 @@
             and bridge_time&gt;=#{startTime}
             and bridge_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
@@ -369,7 +363,6 @@
             and tracking_time&gt;=#{startTime}
             and tracking_time&lt;=#{endTime}
         </if>
-        <!--动态条件 -->
         <if test="groupIds!=null"> <!-- 组id -->
             and tracking_group_id in
             <foreach collection="groupIds" index="index" item="item" open="(" separator="," close=")">
