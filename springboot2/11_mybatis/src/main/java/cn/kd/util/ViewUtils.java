@@ -13,7 +13,8 @@ public class ViewUtils {
      * @return 保留两位小数
      */
     public static String calculateAverageValue(Long divisor, Long dividend) {
-        if (divisor == null || divisor == 0.00D || dividend == null || dividend == 0.00D) {
+        if (divisor == null || divisor == 0.00D
+                || dividend == null || dividend == 0.00D) {
             return String.format("%.2f", DEFAULT_VIEW_VALUE);
         }
         Double result = (double) divisor / (double) dividend;
