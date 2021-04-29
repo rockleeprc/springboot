@@ -5,6 +5,9 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * 加盟顾问工作量和产出
+ */
 public interface WorkloadAdviserMapper {
 
     List<WorkloadAdviserView> selectWorkloadAdviser(@Param("startTime") String startTime,
