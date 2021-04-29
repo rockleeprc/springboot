@@ -2,6 +2,8 @@ package cn.kd.entity.view;
 
 import cn.kd.entity.WorkloadAdviser;
 
+import static cn.kd.util.ViewUtils.calculateAverageValue;
+
 
 public class WorkloadAdviserView extends WorkloadAdviser {
     // 平均跟进次数：跟进次数/跟进客户数 指标格式：4.33
@@ -26,13 +28,4 @@ public class WorkloadAdviserView extends WorkloadAdviser {
     }
 
 
-    private static Double DEFAULT_VIEW_VALUE = 0D;
-
-    public static String calculateAverageValue(Long divisor, Long dividend) {
-        if (divisor == null || divisor == 0.00D || dividend == null || dividend == 0.00D) {
-            return String.format("%.2f", DEFAULT_VIEW_VALUE);
-        }
-        Double result = (double) divisor / (double) dividend;
-        return String.format("%.2f", result);
-    }
 }
