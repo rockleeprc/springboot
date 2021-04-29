@@ -16,12 +16,12 @@
         <maven.compiler.target>8</maven.compiler.target>
     </properties>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>cloudera</id>-->
-<!--            <url>https://www.ebi.ac.uk/intact/maven/nexus/content/repositories/public/</url>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>cloudera</id>
+            <url>https://www.ebi.ac.uk/intact/maven/nexus/content/repositories/public/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
