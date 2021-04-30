@@ -8,9 +8,10 @@ public class ViewUtils {
     private static Double DEFAULT_VIEW_VALUE = 0D;
 
     /**
+     * 保留两位小数，默认0.00
      * @param divisor  除数
      * @param dividend 被除数
-     * @return 保留两位小数
+     * @return
      */
     public static String calculateAverageValue(Long divisor, Long dividend) {
         if (divisor == null || divisor == 0.00D
