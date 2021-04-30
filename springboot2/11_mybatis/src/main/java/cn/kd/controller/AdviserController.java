@@ -2,15 +2,17 @@ package cn.kd.controller;
 
 import cn.kd.common.Result;
 import cn.kd.service.AdviserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 
 /**
  * 加盟顾问
@@ -19,6 +21,7 @@ import javax.validation.constraints.*;
 @RestController
 @RequestMapping("/adviser")
 public class AdviserController {
+    private static final Logger logger = LoggerFactory.getLogger(AdviserController.class);
     @Autowired
     private AdviserService adviserService;
 
@@ -66,4 +69,28 @@ public class AdviserController {
         return Result.success(adviserService.selectWorkloadAdviserGroup(startTime, endTime, groupIds, pageNum, pageSize));
     }
 
+    @GetMapping("info1")
+    public Result info1() {
+        String str = null;
+        str.toUpperCase();
+        return Result.success();
+    }
+
+    @GetMapping("info2")
+    public Result info2() {
+        int i = 1 / 0;
+        return Result.success();
+    }
+
+    @GetMapping("info3")
+    public Result info3() {
+        int[] arr = new int[2];
+        return Result.success(arr[10]);
+    }
+
+    @GetMapping("info4")
+    public Result info4() {
+        logger.error("{}", new RuntimeException("aaaa"));
+        return Result.success("");
+    }
 }

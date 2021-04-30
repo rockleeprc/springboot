@@ -41,6 +41,7 @@ public class Result<T> implements Serializable {
         return result(code, data);
     }
 
+
     public Integer getCode() {
         return code;
     }

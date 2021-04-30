@@ -31,10 +31,16 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
-    public Result<?> nullPointerException(HttpServletRequest req, NullPointerException exception) {
-        logger.error("发生空指针异常，原因是:", exception);
-        // TODO 定义npe code、 删掉HttpServletRequest
-        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR);
+    public Result<?> nullPointerException(NullPointerException exception, HttpServletRequest request) {
+        logger.error("发生NullPointerException，路径：{}，原因是：", request.getRequestURI(), exception);
+        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
+    }
+
+    @ExceptionHandler(value = ArithmeticException.class)
+    @ResponseBody
+    public Result<?> arithmeticException(ArithmeticException exception, HttpServletRequest request) {
+        logger.error("发生ArithmeticException，路径：{}，原因是：", request.getRequestURI(), exception);
+        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
     }
 
 
@@ -45,9 +51,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result<?> exception(Exception exception) {
-        logger.error("未知异常！原因是:", exception);
-        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR);
+    public Result<?> exception(Exception exception, HttpServletRequest request) {
+        logger.error("发生exception，路径：{}，原因是：", request.getRequestURI(), exception);
+        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
