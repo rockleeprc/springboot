@@ -90,7 +90,6 @@ public class AdviserController {
 
     @GetMapping("info4")
     public Result info4() {
-        logger.error("{}", new RuntimeException("aaaa"));
         return Result.success("");
     }
 }

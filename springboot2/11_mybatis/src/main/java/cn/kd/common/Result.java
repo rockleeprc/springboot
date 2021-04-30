@@ -1,6 +1,7 @@
 package cn.kd.common;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 
 public class Result<T> implements Serializable {
@@ -9,19 +10,22 @@ public class Result<T> implements Serializable {
 
     private String message;
 
+    private LocalDateTime timestamp;
+
     private T data;
 
     private Result() {
     }
 
-    private Result(Integer code, String message, T data) {
+    private Result(Integer code, String message, LocalDateTime timestamp, T data) {
         this.code = code;
         this.message = message;
+        this.timestamp = timestamp;
         this.data = data;
     }
 
     private static <T> Result<T> result(Code code, T data) {
-        Result<T> result = new Result(code.getCode(), code.getMessage(), data);
+        Result<T> result = new Result(code.getCode(), code.getMessage(), LocalDateTime.now(), data);
         return result;
     }
 
@@ -41,6 +45,14 @@ public class Result<T> implements Serializable {
         return result(code, data);
     }
 
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
 
     public Integer getCode() {
         return code;
