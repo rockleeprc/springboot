@@ -4,9 +4,8 @@ import cn.kd.common.Result;
 import cn.kd.common.SystemCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolation;
@@ -19,7 +18,7 @@ import java.util.Set;
 /**
  * 统一异常处理
  */
-@ControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
@@ -29,17 +28,15 @@ public class GlobalExceptionHandler {
      *
      * @return
      */
-    @ExceptionHandler(value = NullPointerException.class)
-    @ResponseBody
+    @ExceptionHandler(NullPointerException.class)
     public Result<?> nullPointerException(NullPointerException exception, HttpServletRequest request) {
-        logger.error("发生NullPointerException，路径：{}，原因是：", request.getRequestURI(), exception);
+        logger.error("exception cause {},path {}", exception.getClass(), request.getRequestURI(), exception);
         return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
     }
 
-    @ExceptionHandler(value = ArithmeticException.class)
-    @ResponseBody
+    @ExceptionHandler(ArithmeticException.class)
     public Result<?> arithmeticException(ArithmeticException exception, HttpServletRequest request) {
-        logger.error("发生ArithmeticException，路径：{}，原因是：", request.getRequestURI(), exception);
+        logger.error("exception cause {},path {}", exception.getClass(), request.getRequestURI(), exception);
         return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
     }
 
@@ -49,15 +46,13 @@ public class GlobalExceptionHandler {
      *
      * @return
      */
-    @ExceptionHandler(value = Exception.class)
-    @ResponseBody
+    @ExceptionHandler(Exception.class)
     public Result<?> exception(Exception exception, HttpServletRequest request) {
-        logger.error("发生exception，路径：{}，原因是：", request.getRequestURI(), exception);
+        logger.error("exception cause {},path {}", exception.getClass(), request.getRequestURI(), exception);
         return Result.failure(SystemCode.INTERNAL_SERVER_ERROR, exception.getClass());
     }
 
-    @ExceptionHandler(value = ConstraintViolationException.class)
-    @ResponseBody
+    @ExceptionHandler(ConstraintViolationException.class)
     public Result<?> constraintViolationException(ConstraintViolationException exception) {
         Set<ConstraintViolation<?>> violations = exception.getConstraintViolations();
         Map<String, String> errorMap = new HashMap<>();
