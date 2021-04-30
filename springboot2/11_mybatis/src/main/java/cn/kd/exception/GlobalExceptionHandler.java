@@ -31,10 +31,10 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = NullPointerException.class)
     @ResponseBody
-    public Result<?> exceptionHandler(HttpServletRequest req, NullPointerException exception) {
+    public Result<?> nullPointerException(HttpServletRequest req, NullPointerException exception) {
         logger.error("发生空指针异常，原因是:", exception);
         // TODO 定义npe code、 删掉HttpServletRequest
-        return Result.error(SystemCode.INTERNAL_SERVER_ERROR);
+        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR);
     }
 
 
@@ -45,9 +45,9 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public Result<?> exceptionHandler(Exception exception) {
+    public Result<?> exception(Exception exception) {
         logger.error("未知异常！原因是:", exception);
-        return Result.error(SystemCode.INTERNAL_SERVER_ERROR);
+        return Result.failure(SystemCode.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)
@@ -58,6 +58,6 @@ public class GlobalExceptionHandler {
         for (ConstraintViolation violation : violations) {
             errorMap.put(violation.getPropertyPath().toString(), violation.getMessage());
         }
-        return Result.error(SystemCode.BAD_REQUEST, errorMap);
+        return Result.failure(SystemCode.BAD_REQUEST, errorMap);
     }
 }

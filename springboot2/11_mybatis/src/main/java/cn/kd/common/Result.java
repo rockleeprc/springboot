@@ -33,11 +33,11 @@ public class Result<T> implements Serializable {
         return result(SystemCode.SUCCESS, data);
     }
 
-    public static <T> Result<T> error(Code code) {
-        return error(code, null);
+    public static <T> Result<T> failure(Code code) {
+        return failure(code, null);
     }
 
-    public static <T> Result<T> error(Code code, T data) {
+    public static <T> Result<T> failure(Code code, T data) {
         return result(code, data);
     }
 
