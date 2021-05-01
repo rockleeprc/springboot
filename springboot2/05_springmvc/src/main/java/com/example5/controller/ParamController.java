@@ -19,23 +19,23 @@ public class ParamController {
     }
 
     @RequestMapping("/p2")
-    public String param2(@Valid @NotBlank(message="str1不能为空") @RequestParam("str1") String str1, @NotNull @NotEmpty @RequestParam("str2") String str2) {
+    public String param2(@Valid @NotBlank(message = "str1不能为空") @RequestParam("str1") String str1, @NotNull @RequestParam("str2") String str2) {
         return str1 + " | " + str2;
     }
 
     @PostMapping(value = "p3")
-    public void param3(@RequestParam(value = "age",required = false) Integer age,@RequestParam(value = "name",required = false) String name,@RequestParam(value = "array",required = false)Integer[] array){
+    public void param3(@RequestParam(value = "age", required = false) Integer age, @RequestParam(value = "name", required = false) String name, @RequestParam(value = "array", required = false) Integer[] array) {
         System.out.println(age);
         System.out.println(name);
         System.out.println(Arrays.toString(array));
     }
 
     @PostMapping(value = "p4")
-    public void param4(@RequestBody Parma param){
+    public void param4(@RequestBody Parma param) {
         System.out.println(param);
     }
 
-    static class Parma{
+    static class Parma {
         private Integer age;
         private String name;
         Integer[] array;

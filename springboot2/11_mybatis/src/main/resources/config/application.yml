@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: mybatis
+  profiles:
+    active:
+      - dev
+
+logging:
+  config: classpath:config/logback-spring.xml
+

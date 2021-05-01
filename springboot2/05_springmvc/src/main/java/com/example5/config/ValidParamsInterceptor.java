@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -19,7 +20,7 @@ import javax.validation.constraints.Size;
 import java.lang.reflect.Parameter;
 import java.util.*;
 
-@Deprecated
+@Component
 public class ValidParamsInterceptor extends HandlerInterceptorAdapter {
     private static Logger LOG = LoggerFactory.getLogger(ValidParamsInterceptor.class);
 
