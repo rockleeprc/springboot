@@ -5,6 +5,7 @@ import cn.kd.service.AdviserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,7 +39,7 @@ public class AdviserController {
      * @param pageSize
      * @return
      */
-    @PostMapping("/v1/workloadAdviser")
+    @PostMapping(value = "/v1/workloadAdviser", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Result workloadAdviser(@RequestParam(name = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
                                   @RequestParam(name = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
                                   @RequestParam(name = "groupIds", required = false) Long[] groupIds,
@@ -60,7 +61,7 @@ public class AdviserController {
      * @param pageSize
      * @return
      */
-    @PostMapping("/v1/workloadAdviserGroup")
+    @PostMapping(value = "/v1/workloadAdviserGroup", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public Result workloadAdviserGroup(@RequestParam(name = "startTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String startTime,
                                        @RequestParam(name = "endTime", required = false) @Valid @NotNull(message = "不能为空") @Pattern(regexp = "^[\\d]{4}-[\\d]{2}-[\\d]{2}", message = "日期格式:yyyy-MM-dd") String endTime,
                                        @RequestParam(name = "groupIds", required = false) Long[] groupIds,
