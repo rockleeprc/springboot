@@ -20,6 +20,7 @@
         <module>09_annotation</module>
         <module>10_event</module>
         <module>11_mybatis</module>
+        <module>12_spring_webflux</module>
     </modules>
 
 
