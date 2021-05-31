@@ -8,7 +8,6 @@ import com.foo.config.ProfileConfiguration;
 import com.foo.service.PersonService;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -24,12 +23,6 @@ public class Bootstrap {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProcessorConfiguration.class);
 
-        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(Yellow.class);
-        builder.addPropertyValue("message", "红色");
-//        builder.setInitMethodName("init");
-//        builder.setDestroyMethodName("destroy");
-        AbstractBeanDefinition yellowBeanDefinition = builder.getBeanDefinition();
-        BeanDefinitionReaderUtils.registerWithGeneratedName(yellowBeanDefinition, context);
         Yellow yellow = context.getBean(Yellow.class);
         System.out.println(yellow);
         context.close();
