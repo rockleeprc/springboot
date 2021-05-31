@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class CircularDependsonConfiguration {
+public class CircularDependsOnConfiguration {
 
     @Bean
     public A a() {
