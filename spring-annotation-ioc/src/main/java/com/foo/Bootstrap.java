@@ -5,9 +5,10 @@ import com.foo.bean.Person;
 import com.foo.bean.Yellow;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
-import com.foo.servervice.PersonService;
+import com.foo.service.PersonService;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
@@ -17,35 +18,21 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Bootstrap {
 
     public static void main(String[] args) {
-        System.out.println(canonicalName("A"));
-        ReentrantLock lock = new ReentrantLock();
-        Thread t1 = new Thread(() -> {
-            lock.lock();
-            try {
-                while (true) ;
-            } finally {
-                lock.unlock();
-            }
-        }, "t1");
-        Thread t2 = new Thread(() -> {
-            lock.lock();
-            try {
-                while (true) ;
-            } finally {
-                lock.unlock();
-            }
-        }, "t2");
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProcessorConfiguration.class);
 
-        t1.start();
-        t2.start();
-
-        while (true) ;
-
+        BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(Yellow.class);
+        builder.addPropertyValue("message", "红色");
+//        builder.setInitMethodName("init");
+//        builder.setDestroyMethodName("destroy");
+        AbstractBeanDefinition yellowBeanDefinition = builder.getBeanDefinition();
+        BeanDefinitionReaderUtils.registerWithGeneratedName(yellowBeanDefinition, context);
+        Yellow yellow = context.getBean(Yellow.class);
+        System.out.println(yellow);
+        context.close();
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);

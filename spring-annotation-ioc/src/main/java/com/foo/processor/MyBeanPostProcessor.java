@@ -17,6 +17,11 @@ public class MyBeanPostProcessor implements BeanPostProcessor {
 
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         System.out.println("postProcessAfterInitialization...");
+        if (bean instanceof Yellow) {
+            Yellow yellow = (Yellow) bean;
+//            yellow.setMessage("---hello processor");
+//            return yellow;
+        }
         return bean;
     }
 }
