@@ -1,7 +1,7 @@
 package com.foo;
 
+import com.foo.bean.BenzCar;
 import com.foo.bean.Cat;
-import com.foo.bean.Person;
 import com.foo.bean.Yellow;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
@@ -12,40 +12,15 @@ import org.springframework.beans.factory.support.BeanDefinitionBuilder;
 import org.springframework.beans.factory.support.BeanDefinitionReaderUtils;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationEvent;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 
 public class Bootstrap {
 
     public static void main(String[] args) {
-        System.out.println(canonicalName("A"));
-        ReentrantLock lock = new ReentrantLock();
-        Thread t1 = new Thread(() -> {
-            lock.lock();
-            try {
-                while (true) ;
-            } finally {
-                lock.unlock();
-            }
-        }, "t1");
-        Thread t2 = new Thread(() -> {
-            lock.lock();
-            try {
-                while (true) ;
-            } finally {
-                lock.unlock();
-            }
-        }, "t2");
-
-        t1.start();
-        t2.start();
-
-        while (true) ;
-
+        m3();
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
@@ -109,9 +84,19 @@ public class Bootstrap {
      */
     public static void m3() {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ProcessorConfiguration.class);
-        context.publishEvent(new ApplicationEvent(new String("自定义事件")) {
-        });
-        Person person = context.getBean(Person.class);
+//
+//        String[] names = context.getBeanDefinitionNames();
+//        for (String name : names) {
+//            System.out.println(name);
+//        }
+
+        BenzCar benzCar = context.getBean(BenzCar.class);
+        System.out.println("c:" + benzCar);
+        System.out.println(benzCar.getEngine() + " : " + benzCar.getEngine().getClass());
+//        Person person = context.getBean(Person.class);
+//        System.out.println(person);
+//        Cat cat = context.getBean(Cat.class);
+//        System.out.println(cat);
         context.close();
     }
 

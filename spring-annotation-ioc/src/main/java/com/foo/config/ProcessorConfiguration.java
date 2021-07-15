@@ -1,40 +1,62 @@
 package com.foo.config;
 
+import com.foo.bean.BenzCar;
+import com.foo.bean.Engine;
+import com.foo.processor.SpecialBeanForEngineProcessor;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.support.BeanDefinitionRegistryPostProcessor;
-import org.springframework.context.ApplicationContextInitializer;
-import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import com.foo.processor.*;
 
 
 @Configuration
 public class ProcessorConfiguration {
-    @Bean
-    public BeanPostProcessor beanPostProcessor() {
-        return new MyBeanPostProcessor();
-    }
+//    @Bean
+//    public BeanPostProcessor beanPostProcessor() {
+//        return new MyBeanPostProcessor();
+//    }
+
 
     @Bean
-    public BeanFactoryPostProcessor beanFactoryPostProcessor() {
-        return new MyBeanFactoryPostProcessor();
+    public BeanFactoryPostProcessor specialBeanForEngineProcessor() {
+        return new SpecialBeanForEngineProcessor();
     }
 
-    @Bean
-    public BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
-        return new MyBeanDefinitionRegistryPostProcessor();
+
+    @Bean(initMethod = "start")
+    BenzCar benzCar(Engine engine) {
+        BenzCar car = new BenzCar();
+        car.setEngine(engine);
+        return car;
     }
 
-    @Bean
-    public ApplicationListener applicationListener() {
-        return new MyApplicationListener();
-    }
+//    @Bean
+//    public BeanFactoryPostProcessor beanFactoryPostProcessor() {
+//        return new MyBeanFactoryPostProcessor();
+//    }
+//
+//    @Bean
+//    public Person person() {
+//        return new Person();
+//    }
+//
+//    @Bean
+//    public Cat cat() {
+//        return new Cat();
+//    }
 
-    @Bean
-    public ApplicationContextInitializer applicationContextInitializer() {
-        return new SpringApplicationContextInitializer();
-    }
+//    @Bean
+//    public BeanDefinitionRegistryPostProcessor beanDefinitionRegistryPostProcessor() {
+//        return new MyBeanDefinitionRegistryPostProcessor();
+//    }
+//
+//    @Bean
+//    public ApplicationListener applicationListener() {
+//        return new MyApplicationListener();
+//    }
+//
+//    @Bean
+//    public ApplicationContextInitializer applicationContextInitializer() {
+//        return new SpringApplicationContextInitializer();
+//    }
 
 }

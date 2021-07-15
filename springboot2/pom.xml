@@ -45,10 +45,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <dependency>
-                <groupId>mysql</groupId>
-                <artifactId>mysql-connector-java</artifactId>
-            </dependency>
 
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>
