@@ -5,7 +5,7 @@ import com.foo.bean.Cat;
 import com.foo.bean.Yellow;
 import com.foo.config.ProcessorConfiguration;
 import com.foo.config.ProfileConfiguration;
-import com.foo.servervice.PersonService;
+import com.foo.service.PersonService;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.BeanDefinitionBuilder;
@@ -21,6 +21,7 @@ public class Bootstrap {
 
     public static void main(String[] args) {
         m3();
+
     }
 
     private static final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);

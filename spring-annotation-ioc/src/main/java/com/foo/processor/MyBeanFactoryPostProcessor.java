@@ -20,5 +20,8 @@ public class MyBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
             beanDefinition.getPropertyValues().add("name", "zhangsan");
         }
 
+        BeanDefinition redDefinition = beanFactory.getBeanDefinition("com.foo.bean.Red");
+        BeanDefinition yellowDefinition = beanFactory.getBeanDefinition("yellow");
+        System.out.println(yellowDefinition);
     }
 }
