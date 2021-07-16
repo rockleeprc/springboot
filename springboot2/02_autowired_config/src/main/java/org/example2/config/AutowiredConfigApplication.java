@@ -1,18 +1,21 @@
 package org.example2.config;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class AutowiredConfigApplication {
     public static void main(String[] args) {
-//        SpringApplication.run(AutowiredConfigApplication.class, args);
-//        ConfigurableApplicationContext context = new SpringApplicationBuilder(AutowiredConfigApplication.class)
-//                .web(WebApplicationType.NONE)
-//                .run(args);
-//
-//        context.close();
+        SpringApplication.run(AutowiredConfigApplication.class, args);
+        ConfigurableApplicationContext context = new SpringApplicationBuilder(AutowiredConfigApplication.class)
+                .web(WebApplicationType.NONE)
+                .run(args);
 
-        System.out.println(camelToUnderline("usreName",1));
+        context.close();
+
 
     }
 

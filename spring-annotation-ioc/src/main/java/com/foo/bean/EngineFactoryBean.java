@@ -15,7 +15,7 @@ public class EngineFactoryBean implements FactoryBean<Engine>, BeanNameAware, In
     public Engine getObject() throws Exception {
         System.out.println("EngineFactoryBean  to build :" + name);
         Engine engine = (Engine) Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[]{Engine.class}, this);
-        System.out.println(engine);
+        System.out.println(engine + " | " + engine.getClass());
         return engine;
     }
 
@@ -39,17 +39,5 @@ public class EngineFactoryBean implements FactoryBean<Engine>, BeanNameAware, In
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         System.out.println("here is invoke  engine:" + method.getName());
         return null;
-    }
-
-
-    public static void main(String[] args) {
-        Object eee = Proxy.newProxyInstance(EngineFactoryBean.class.getClassLoader(), new Class[]{Engine.class}, new InvocationHandler() {
-            @Override
-            public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                System.out.println(proxy.getClass());
-                return proxy;
-            }
-        });
-        System.out.println(eee);
     }
 }

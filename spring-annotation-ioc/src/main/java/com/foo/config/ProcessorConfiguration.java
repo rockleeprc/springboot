@@ -2,12 +2,9 @@ package com.foo.config;
 
 import com.foo.bean.BenzCar;
 import com.foo.bean.Engine;
-import com.foo.processor.SpecialBeanForEngineProcessor;
 import com.foo.bean.Red;
-import com.foo.processor.MyApplicationListener;
-import com.foo.processor.MyBeanDefinitionRegistryPostProcessor;
 import com.foo.processor.MyBeanFactoryPostProcessor;
-import com.foo.processor.MyBeanPostProcessor;
+import com.foo.processor.SpecialBeanForEngineProcessor;
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -35,10 +32,10 @@ public class ProcessorConfiguration {
         return car;
     }
 
-//    @Bean
-//    public BeanFactoryPostProcessor beanFactoryPostProcessor() {
-//        return new MyBeanFactoryPostProcessor();
-//    }
+    @Bean
+    public BeanFactoryPostProcessor myBeanFactoryPostProcessor() {
+        return new MyBeanFactoryPostProcessor();
+    }
 //
 //    @Bean
 //    public Person person() {

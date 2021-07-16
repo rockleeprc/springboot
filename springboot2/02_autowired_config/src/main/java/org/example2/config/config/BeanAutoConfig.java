@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class BeanAutoConfig {
 
-//    @Bean(value="p1")
+    //    @Bean(value="p1")
 //    @ConfigurationProperties(prefix = "person")
     public Person p1() {
         return new Person();
@@ -17,4 +17,5 @@ public class BeanAutoConfig {
     public Person p2() {
         return new Person("tom", 20);
     }
+
 }
