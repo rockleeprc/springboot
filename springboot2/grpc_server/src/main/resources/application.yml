@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: hello-grpc-server
+grpc:
+  server:
+    port: 6000
+server:
+  port: 8080

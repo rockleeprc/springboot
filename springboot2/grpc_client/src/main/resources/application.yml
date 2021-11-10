@@ -1,0 +1,11 @@
+info:
+  version: 1.0
+  name: hello-grpc-client
+grpc:
+  client:
+    hello-grpc-server:
+      enableKeepAlive: true
+      keepAliveWithoutCalls: true
+      negotiationType: plaintext
+server:
+  port: 8088

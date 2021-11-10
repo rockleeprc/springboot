@@ -1,0 +1,57 @@
+server:
+  port: 8002
+
+spring:
+  mvc:
+    dateFormat: yyyy-MM-dd HH:mm:ss
+  jackson:
+    dateFormat: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    hikari:
+      maximum-pool-size: 10
+      minimum-idle: 10
+      idle-timeout: 600000
+      connection-timeout: 5000
+      pool-name: MySQLHikariCP
+      connection-test-query: SELECT 1
+  shardingsphere:
+    datasource:
+      names: ds0 # 数据源名称
+      ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        jdbc-url: jdbc:mysql://node3:3306/mybatis?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+        username: root
+        password: root
+        driver-class-name: com.mysql.cj.jdbc.Driver
+    sharding:
+      tables:
+        country:
+          actual-data-nodes: ds0.country_$->{1..2}
+          table-strategy:
+            inline:    # 分片策略
+              sharding-column: id
+              algorithm-expression: country_$->{id%2+1}
+          key-generator:    # 主见生成策略
+            type: SNOWFLAKE
+            column: id
+    props:
+      sql.show: true
+
+
+mybatis:
+  typeAliasesPackage: cn.kd.entity
+  mapperLocations: classpath:mapper/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: true
+    defaultStatementTimeout: 30
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+

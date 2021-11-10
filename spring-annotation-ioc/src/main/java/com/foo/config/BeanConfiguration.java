@@ -19,7 +19,7 @@ import org.springframework.stereotype.Service;
 /*
 不包含
 @ComponentScan(basePackages="com.foo",excludeFilters = {@ComponentScan.Filter({Controller.class,Service.class})})
-只包含，必须配置useDefaultFilters=false
+includeFilters：必须配置useDefaultFilters=false
 @ComponentScan(basePackages = "com.foo",includeFilters = {@ComponentScan.Filter({Repository.class})},useDefaultFilters=false)
 完整写法
 @ComponentScan(basePackages = "com.foo",includeFilters = {@ComponentScan.Filter(type=FilterType.ANNOTATION,classes={Repository.class})},useDefaultFilters=false)

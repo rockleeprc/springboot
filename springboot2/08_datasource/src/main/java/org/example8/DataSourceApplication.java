@@ -1,7 +1,6 @@
 package org.example8;
 
 import com.zaxxer.hikari.HikariDataSource;
-import com.zaxxer.hikari.pool.HikariProxyConnection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,20 +9,18 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Map;
 
 //@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, JdbcTemplateAutoConfiguration.class})
 @SpringBootApplication
-public class Application {
+public class DataSourceApplication {
     @Autowired
     private JdbcTemplate jdbcTemplate;
     @Autowired
     private DataSource dataSource;
 
     public static void main(String[] args) throws SQLException, InterruptedException {
-        ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class)
+        ConfigurableApplicationContext context = new SpringApplicationBuilder(DataSourceApplication.class)
                 .web(WebApplicationType.NONE)
                 .run(args);
 

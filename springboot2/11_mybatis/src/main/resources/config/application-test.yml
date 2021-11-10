@@ -12,16 +12,16 @@ spring:
     dateFormat: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://39.107.252.235:29306/sys_center?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
-    username: readonly
-    password: bTxlpCq3XI4l5g
+    url: jdbc:mysql://node3:3306/mybatis?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    username: root
+    password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
       minimum-idle: 10
       idle-timeout: 600000
       connection-timeout: 5000
-      pool-name: ImpalaHikariCP
+      pool-name: HikariCP
       connection-test-query: SELECT 1
 
 mybatis:
