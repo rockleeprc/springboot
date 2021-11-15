@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: hello-grpc-server
+  profiles:
+    active: dev

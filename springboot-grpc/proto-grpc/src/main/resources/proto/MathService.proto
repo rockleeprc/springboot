@@ -1,0 +1,25 @@
+// 指定protobuf版本
+syntax = "proto3";
+// 是否将生成的类放到不同的文件中，false：所有类都会存在一个文件中，以内部类的形式
+option java_multiple_files = true;
+// 生成辅助类所在的包
+option java_package = "com.hualala.proto";
+// protobuf描述类的名称
+option java_outer_classname = "MathServiceInterface";
+
+import "com.hualala.proto";
+
+// 定义服务接口
+service MathService{
+  rpc add(AddRequest) returns(AddReply){}
+}
+
+// 定义数据结构
+message AddRequest{
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message AddReply{
+  int32 res = 1;
+}

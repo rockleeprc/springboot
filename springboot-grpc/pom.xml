@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.hualala</groupId>
+    <artifactId>springboot-grpc</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>grpc-server</module>
+        <module>grpc-client</module>
+        <module>grpc-lib</module>
+        <module>proto-grpc</module>
+    </modules>
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <encoding>UTF-8</encoding>
+        <java.version>1.8</java.version>
+        <java.source.version>${java.version}</java.source.version>
+        <java.target.version>${java.version}</java.target.version>
+        <maven.compiler.source>${java.version}</maven.compiler.source>
+        <maven.compiler.target>${java.version}</maven.compiler.target>
+        <project.build.sourceEncoding>${encoding}</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>${encoding}</project.reporting.outputEncoding>
+        <spring-boot-version>2.3.2.RELEASE</spring-boot-version>
+        <spring-cloud-version>Hoxton.SR9</spring-cloud-version>
+        <spring-cloud-alibaba-version>2.2.6.RELEASE</spring-cloud-alibaba-version>
+        <grpc.version>1.34.1</grpc.version><!-- CURRENT_GRPC_VERSION -->
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>hualala repo</id>
+            <url>http://repo.hualala.com/nexus/content/groups/Public</url>
+        </repository>
+        <repository>
+            <id>gozap</id>
+            <name>gozap Repository</name>
+            <url>http://repo.gozap.com/repos/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>gozap-snapshots</id>
+            <name>gozap snapshots</name>
+            <url>http://repo.gozap.com/repos/content/repositories/snapshots</url>
+        </repository>
+
+        <!--        <repository>-->
+        <!--            <id>getui-nexus</id>-->
+        <!--            <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>-->
+        <!--        </repository>-->
+    </repositories>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>io.grpc</groupId>
+                <artifactId>grpc-bom</artifactId>
+                <version>${grpc.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>1.18.22</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+</project>

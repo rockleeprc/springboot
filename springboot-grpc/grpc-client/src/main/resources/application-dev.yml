@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: hello-grpc-client
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+      zookeeper:
+        path: "/sentinel_rule_config"
+  redis:
+    database: 0
+    host: 172.20.44.10
+    port: 6379
+    timeout: 2000
+    lettuce:
+      pool:
+        max-active: 200
+        max-wait: 3000
+        max-idle: 20
+        min-idle: 10
+
+grpc:
+  keep-alive-enable: true
+  server:
+    port: 6666
+  clients:
+    hello-grpc-server:
+      address: "127.0.0.1:6565"
+
+zookeeper:
+  address: "172.20.44.6:2181"
+
+server:
+  port: 8099
+
+

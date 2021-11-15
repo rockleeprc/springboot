@@ -1,0 +1,15 @@
+spring:
+  application:
+    name: hello-grpc-server
+  cloud:
+    sentinel:
+      transport:
+        dashboard: 127.0.0.1:8080
+grpc:
+  keep-alive-enable: true
+  server:
+    serverName: hello-grpc-server
+    port: 6565
+    executorThreadCount: 200
+server:
+  port: 8088
