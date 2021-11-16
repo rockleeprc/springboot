@@ -16,22 +16,44 @@ import org.springframework.stereotype.Component;
 public class RedisLettuceConfig extends CachingConfigurerSupport {
 
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
+    public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory, ProtoStuffRedisSerializer protoStuffRedisSerializer) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
+        // key Serializer
         redisTemplate.setKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
+        // value Serializer
+        redisTemplate.setValueSerializer(protoStuffRedisSerializer);
+        redisTemplate.setHashValueSerializer(protoStuffRedisSerializer);
 
+        redisTemplate.setConnectionFactory(lettuceConnectionFactory);
+        return redisTemplate;
+    }
+
+    /**
+     * json 序列化
+     *
+     * @return
+     * @see RedisLettuceConfig#protoStuffRedisSerializer() 推荐使用
+     */
+    @Bean
+    @Deprecated
+    public Jackson2JsonRedisSerializer jackson2JsonRedisSerializer() {
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
         objectMapper.activateDefaultTyping(objectMapper.getPolymorphicTypeValidator(), ObjectMapper.DefaultTyping.NON_FINAL);
         jackson2JsonRedisSerializer.setObjectMapper(objectMapper);
+        return jackson2JsonRedisSerializer;
+    }
 
-        redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
-        redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
-
-        redisTemplate.setConnectionFactory(lettuceConnectionFactory);
-        return redisTemplate;
+    /**
+     * protostuff 序列化
+     *
+     * @return
+     */
+    @Bean
+    public ProtoStuffRedisSerializer protoStuffRedisSerializer() {
+        return new ProtoStuffRedisSerializer();
     }
 
     @Bean

@@ -16,7 +16,7 @@ import java.util.concurrent.TimeUnit;
  * 缓存操作层
  */
 @Service
-public class CacheService {
+public class CacheOperationService {
 
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -62,7 +62,7 @@ public class CacheService {
      * @param key    健
      * @param params 参数拼接字符串
      * @param value  值
-     * @see com.hualala.client.service.CacheService#hashPut(java.lang.String, java.lang.String, java.lang.Object, java.lang.Long, java.util.concurrent.TimeUnit)
+     * @see CacheOperationService#hashPut(java.lang.String, java.lang.String, java.lang.Object, java.lang.Long, java.util.concurrent.TimeUnit)
      */
     public void hashPutDefaultExpire(String key, String params, Object value) {
         hashPut(key, params, value, CacheConstants.HASH_EXPIRE_HOUR, TimeUnit.HOURS);
@@ -76,7 +76,7 @@ public class CacheService {
      * @param value   值
      * @param timeout 失效时间
      * @param unit    失效时间单位
-     * @see CacheService#hashPut(java.lang.String, java.lang.String, java.util.Map, java.lang.Long, java.util.concurrent.TimeUnit)
+     * @see CacheOperationService#hashPut(java.lang.String, java.lang.String, java.util.Map, java.lang.Long, java.util.concurrent.TimeUnit)
      */
     public void hashPut(String key, String params, Object value, Long timeout, TimeUnit unit) {
         String murmur128 = HashUtils.murmur128(params);
@@ -121,6 +121,6 @@ public class CacheService {
     }
 
     static class CacheConstants {
-        public static final Long HASH_EXPIRE_HOUR = 24L;
+        public static final Long HASH_DEFAULT_EXPIRE_HOUR = 24L;
     }
 }

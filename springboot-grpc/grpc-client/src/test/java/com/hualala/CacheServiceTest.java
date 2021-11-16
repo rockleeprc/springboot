@@ -2,7 +2,7 @@ package com.hualala;
 
 import com.hualala.client.GrpcClientApplication;
 import com.hualala.client.entity.Person;
-import com.hualala.client.service.CacheService;
+import com.hualala.client.service.CacheOperationService;
 import com.hualala.client.util.HashUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import java.util.concurrent.TimeUnit;
 public class CacheServiceTest {
 
     @Autowired
-    private CacheService cacheService;
+    private CacheOperationService cacheOperationService;
 
     @Autowired
     RedisTemplate redisTemplate;
@@ -30,7 +30,7 @@ public class CacheServiceTest {
     @Test
     public void testPutNoCrash() {
         Person person3 = new Person(3, "liyan3", "中文");
-        cacheService.hashPutDefaultExpire(key, params, person3);
+        cacheOperationService.hashPutDefaultExpire(key, params, person3);
 
         String mur = HashUtils.murmur128(params);
         String sha = HashUtils.sha256(params);
@@ -41,7 +41,7 @@ public class CacheServiceTest {
     @Test
     public void testPutCrash() {
         Person person3 = new Person(4, "liyan4", "日文");
-        cacheService.hashPutDefaultExpire(key, params, person3);
+        cacheOperationService.hashPutDefaultExpire(key, params, person3);
 
         String mur = HashUtils.murmur128(params);
         String sha = HashUtils.sha256(params);
@@ -51,7 +51,7 @@ public class CacheServiceTest {
 
     @Test
     public void testGet() {
-        Person person = cacheService.hashGet(key, "abc", Person.class);
+        Person person = cacheOperationService.hashGet(key, params, Person.class);
         System.out.println(person);
 
 //        HashOperations hashOperations = redisTemplate.opsForHash();
