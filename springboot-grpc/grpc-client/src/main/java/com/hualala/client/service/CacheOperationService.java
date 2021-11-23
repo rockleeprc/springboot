@@ -65,7 +65,7 @@ public class CacheOperationService {
      * @see CacheOperationService#hashPut(java.lang.String, java.lang.String, java.lang.Object, java.lang.Long, java.util.concurrent.TimeUnit)
      */
     public void hashPutDefaultExpire(String key, String params, Object value) {
-        hashPut(key, params, value, CacheConstants.HASH_EXPIRE_HOUR, TimeUnit.HOURS);
+        hashPut(key, params, value, CacheConstants.HASH_DEFAULT_EXPIRE_HOUR, TimeUnit.HOURS);
     }
 
     /**
@@ -98,7 +98,7 @@ public class CacheOperationService {
     }
 
     /**
-     * 缓存hash 类型数据到redis
+     * 缓存hash 类型数据到redis，并且设置expire时间
      *
      * @param key     健
      * @param hash    参数murmur128

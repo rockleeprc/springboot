@@ -24,6 +24,7 @@ public class SentinelController {
     @SentinelResource(fallback = "method1Fallback", blockHandler = "method1BlockHandler")
     @RequestMapping("/method1")
     public String method1(Integer param) throws InterruptedException {
+
         log.info("com.hualala.client.controller.SentinelController.method1......");
         String res = null;
         try {

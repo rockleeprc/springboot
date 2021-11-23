@@ -4,7 +4,7 @@ spring:
   cloud:
     sentinel:
       transport:
-        dashboard: 127.0.0.1:8080
+        dashboard: http://dohko.laobantong-service.sentinel.hualala.com
       zookeeper:
         path: "/sentinel_rule_config"
   redis:

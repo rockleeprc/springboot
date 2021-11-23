@@ -60,11 +60,6 @@ public class CacheServiceTest {
     }
 
 
-    @Test
-    public void testSha() throws InterruptedException {
-        System.out.println(HashUtils.murmur128(params));
-        TimeUnit.SECONDS.sleep(2);
-        System.out.println(HashUtils.murmur128(params));
-    }
+
 
 }
