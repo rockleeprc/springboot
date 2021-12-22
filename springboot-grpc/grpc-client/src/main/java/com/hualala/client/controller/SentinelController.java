@@ -2,6 +2,7 @@ package com.hualala.client.controller;
 
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
 import com.alibaba.csp.sentinel.slots.block.BlockException;
+import com.hualala.client.annotation.Caching;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ public class SentinelController {
         CACHE.put(METHOD1_KEY, "初始值");
     }
 
+    @Caching
     @SentinelResource(fallback = "method1Fallback", blockHandler = "method1BlockHandler")
     @RequestMapping("/method1")
     public String method1(Integer param) throws InterruptedException {
