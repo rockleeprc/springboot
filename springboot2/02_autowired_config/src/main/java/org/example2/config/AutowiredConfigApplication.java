@@ -16,7 +16,6 @@ public class AutowiredConfigApplication {
 
         context.close();
 
-
     }
 
     public static final char UNDERLINE = '_';

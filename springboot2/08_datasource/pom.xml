@@ -11,12 +11,12 @@
 
     <artifactId>08_datasource</artifactId>
 
-    <repositories>
-        <repository>
-            <id>cloudera</id>
-            <url>http://repo.odysseusinc.com/artifactory/community-libs-release-local/</url>
-        </repository>
-    </repositories>
+<!--    <repositories>-->
+<!--        <repository>-->
+<!--            <id>cloudera</id>-->
+<!--            <url>http://repo.odysseusinc.com/artifactory/community-libs-release-local/</url>-->
+<!--        </repository>-->
+<!--    </repositories>-->
 
     <dependencies>
         <dependency>
