@@ -7,6 +7,8 @@ public class Main {
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(AImportAutoConfiguration.class);
         AImportAutoConfiguration bean = context.getBean(AImportAutoConfiguration.class);
-        System.out.println(bean);
+        for (String beanDefinitionName : context.getBeanDefinitionNames()) {
+            System.out.println(beanDefinitionName);
+        }
     }
 }
