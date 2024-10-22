@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 
@@ -35,6 +34,7 @@ public class ParamController {
         System.out.println(param);
     }
 
+    @NotNull
     static class Parma {
         private Integer age;
         private String name;
