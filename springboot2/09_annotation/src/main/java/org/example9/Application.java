@@ -1,18 +1,15 @@
 package org.example9;
 
-import org.example9.annotation.EnableBean;
-import org.example9.domain.Address;
-import org.example9.domain.Car;
-import org.example9.domain.Person;
+import org.example9.config.CustomerTypeExcludeFilter;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.FilterType;
 
 @SpringBootApplication
-@ComponentScan(basePackages = {"org.example9.dao"})
-@EnableBean
+@ComponentScan(excludeFilters = @ComponentScan.Filter(type = FilterType.CUSTOM, classes = CustomerTypeExcludeFilter.class))
 public class Application {
     public static void main(String[] args) {
         ConfigurableApplicationContext context = new SpringApplicationBuilder(Application.class)
@@ -23,12 +20,21 @@ public class Application {
 //        PersonDao personDao = (PersonDao) context.getBean("personDao");
 //        personDao.println();
 
-        Person person = context.getBean(Person.class);
-        Car car = context.getBean(Car.class);
-        Address address = context.getBean(Address.class);
-        System.out.println(person);
-        System.out.println(car);
-        System.out.println(address);
+//        Person person = context.getBean(Person.class);
+//        System.out.println(person);
+
+//        BeanAutoConfiguration bean = context.getBean(BeanAutoConfiguration.class);
+//        System.out.println(bean);
+//
+//        Car car = context.getBean(Car.class);
+//        System.out.println(car);
+
+//        Address address = context.getBean(Address.class);
+//        System.out.println(address);
+
+        for (String beanDefinitionName : context.getBeanDefinitionNames()) {
+            System.out.println("====="+beanDefinitionName);
+        }
 
         context.close();
     }
