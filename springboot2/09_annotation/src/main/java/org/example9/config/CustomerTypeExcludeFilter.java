@@ -9,6 +9,7 @@ import java.io.IOException;
 
 @Component
 public class CustomerTypeExcludeFilter extends TypeExcludeFilter {
+
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
         System.out.println(metadataReader.getClassMetadata().getClassName()+"----" + metadataReader.getClassMetadata().getClassName().equals(BeanAutoConfiguration.class.getName()));
