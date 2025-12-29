@@ -22,15 +22,13 @@
         <module>11_mybatis</module>
         <module>12_spring_webflux</module>
         <module>13_es</module>
-        <module>grpc_server</module>
-        <module>grpc_client</module>
-        <module>grpc_lib</module>
+
     </modules>
 
 
     <properties>
         <encoding>UTF-8</encoding>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
         <java.source.version>${java.version}</java.source.version>
         <java.target.version>${java.version}</java.target.version>
         <maven.compiler.source>${java.version}</maven.compiler.source>
